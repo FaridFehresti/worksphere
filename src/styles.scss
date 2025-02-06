@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import './app/shared/styles/font-icons.scss';
+
+
+body{
+  background-image: linear-gradient(to right top, #00fbfb, #00cdcd, #00a1a1, #007777, #004f4f);background-image: linear-gradient(to right top, #191c1c, #151818, #0f1515, #081010, #000b0b);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+
+//background-image: linear-gradient(to right top, #7ef124, #6dad16, #516f13, #2f3710, #010100);
+//background-image: linear-gradient(to right top, #429209, #3e6b07, #32460a, #202508, #010100);
+//background-image: linear-gradient(to right top, #5a7975, #678376, #788c77, #8b9479, #a19b7e);
+//background-image: linear-gradient(to right top, #356a14, #314e0f, #27350d, #1b1d07, #010100);
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+::-webkit-scrollbar{
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track{
+    background: #e0e3e2;
+  }
+  ::-webkit-scrollbar-thumb{
+    background: #003737;
+    transition: transform(background) 0.5s ease ;
+    border-radius: 5px;
+    border: 2px solid #003737;
+  }

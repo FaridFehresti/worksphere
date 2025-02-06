@@ -1,0 +1,34 @@
+<div class="stat-container flex flex-row">
+  <div class="model-container flex flex-row justify-center items-center">
+    <div class="stat-navigation-side-bar-container flex flex-col py-1 gap-9">
+      <button mat-icon-button [routerLink]="'/stat'" [queryParams]="{type:'overview'}"  class="icon-view_comfy" [class.selected]="routingParam === 'overview'"></button>
+      <button mat-icon-button [routerLink]="'/stat'" [queryParams]="{type:'stats'}" class="icon-stats-bars"[class.selected]="routingParam === 'stats'"></button>
+      <button mat-icon-button [routerLink]="'/stat'" [queryParams]="{type:'condition'}" class="icon-accessibility1" [class.selected]="routingParam === 'condition'"></button>
+      <button mat-icon-button [routerLink]="'/stat'" [queryParams]="{type:'calendar'}" class="icon-calendar" [class.selected]="routingParam === 'calendar'"></button>
+      <button mat-icon-button [routerLink]="'/stat'" [queryParams]="{type:'stack'}" class="icon-stack" [class.selected]="routingParam === 'stack'"></button>
+    </div>
+    <app-three-d-model></app-three-d-model>
+  </div>
+  <div class="content-container w-full flex flex-col gap-4">
+    @switch (routingParam) {
+      @case('overview'){
+        <app-stat-overview></app-stat-overview>
+      }
+      @case('stats'){
+        <app-stat-stats></app-stat-stats>
+      }
+      @case('condition'){
+        <app-stat-condition></app-stat-condition>
+
+      }
+      @case('calendar'){
+        <app-stat-calendar></app-stat-calendar>
+      }
+      @case('stack'){
+        <app-stat-stack></app-stat-stack>
+      }
+    }
+</div>
+  
+  
+</div>

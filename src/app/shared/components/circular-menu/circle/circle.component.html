@@ -1,0 +1,27 @@
+
+
+<div [class]="isHome ? 'home-menu' : 'circular-menu-circle-container'">
+    <div class="circle-menu">
+        <button (click)="closeCircleMenu()" [routerLink]="['/profile']" routerLinkActive="router-link-active"   class="circle-menu-button profile icon-user-tie" mat-icon-button ></button>
+        <button (click)="closeCircleMenu()" [routerLink]="['/social']" routerLinkActive="router-link-active"   class="circle-menu-button social icon-message1" mat-icon-button ></button>
+        <button (click)="closeCircleMenu()" [routerLink]="['/stat']" [queryParams]="{type:'overview'}" routerLinkActive="router-link-active"   class="circle-menu-button stat icon-stats-bars" mat-icon-button ></button>
+        <button (click)="closeCircleMenu()" [routerLink]="['/inventory']" routerLinkActive="router-link-active"   class="circle-menu-button inventory icon-storage" mat-icon-button ></button>
+        <button (click)="closeCircleMenu()" [routerLink]="['/data']" routerLinkActive="router-link-active"   class="circle-menu-button data icon-database" mat-icon-button ></button>
+        <button (click)="closeCircleMenu()" [routerLink]="['/map']" routerLinkActive="router-link-active"   class="circle-menu-button map icon-map" mat-icon-button ></button>
+        <img class="circular-menu-icon"  (click)="closeCircleMenu()" [routerLink]="['/home']"  src="/icons/icon_27.png" alt="">
+
+    </div>
+    <div class="transparent-circle">
+        
+    </div>
+    <div class="circle-light">
+
+    </div>
+    @if(!isHome){
+        <button (click)="closeCircleMenu()" class="circle-menu-button close icon-cross" mat-icon-button ></button>
+
+    }
+
+
+    
+</div>

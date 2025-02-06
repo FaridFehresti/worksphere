@@ -1,0 +1,116 @@
+
+.circular-menu-circle-container{
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: #191c1c;
+    @apply w-screen h-screen;
+    opacity: 1;
+    z-index: 9999;
+}
+.home-menu{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: #3f4948;
+    
+    opacity: 1;
+}
+.circle-light {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,221,221,1) 0%, rgba(224,227,226,0) 55%);
+}
+.close{
+    position: absolute;
+    top: 10%;
+    right: 5%;
+
+    transform: translate(-50%, -50%);
+}
+.circle-menu{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 399px;
+    height: 399px;
+    border-radius: 50%;
+    background: #191c1c;
+    opacity: 1;
+    border: .5px solid #e0e3e2;
+    z-index: 10;
+}
+.circle-menu-button{
+    position: absolute;
+}
+.social{
+    top: 0%;
+    left: 50%;
+    background-color: #191c1c;
+    transform: translate(-50%, -50%);
+}
+.profile{
+    top: 100%;
+    left: 50%;
+    background-color: #191c1c;
+    transform: translate(-50%, -50%);
+}
+.stat{
+    top: 75%;
+    left: 8%;
+    background-color: #191c1c;
+    transform: translate(-50%, -50%);
+}
+.inventory{
+    top: 75%;
+    left: 92%;
+    background-color: #191c1c;
+    transform: translate(-50%, -50%);
+}
+.map{
+    top: 25%;
+    left: 92%;
+    background-color: #191c1c;
+    transform: translate(-50%, -50%);
+
+}
+.data{
+    top: 25%;
+    left: 8%;
+    background-color: #191c1c;
+    transform: translate(-50%, -50%);
+}
+.transparent-circle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: #191c1c;
+    opacity: .1;
+    z-index: 9;
+
+}
+.circular-menu-icon{
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    height: 200px;
+    opacity: 1;
+    z-index: 1000;
+}
+

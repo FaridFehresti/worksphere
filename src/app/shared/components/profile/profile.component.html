@@ -1,0 +1,12 @@
+
+<button [matMenuTriggerFor]="menu" matBadge="1" mat-icon-button class="icon-user-tie">
+    <mat-menu #menu="matMenu">
+
+        <button mat-menu-item>Item 2</button>
+        <button  mat-menu-item>
+            <app-confirm-popup [title]="'Logout'" [description]="'Are you sure you want to logout?'" (onConfirm)="onLogOut()"></app-confirm-popup>
+
+        </button>
+
+
+</mat-menu>

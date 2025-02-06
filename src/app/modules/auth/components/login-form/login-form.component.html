@@ -1,0 +1,58 @@
+<div class="login-form-container w-300">
+  <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="login-card">
+      <mat-card-header >
+        <mat-card-title class="!p-4">Login Form</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="!pl-8 !pr-8">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>email</mat-label>
+              <input matInput placeholder="email" formControlName="email" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Password</mat-label>
+              <input
+                formControlName="password"
+                matInput
+                [type]="hide ? 'password' : 'text'"
+              />
+              <button
+                mat-icon-button
+                type="button"
+                matSuffix
+                (click)="onShowPasswordClick($event)"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+              <mat-error>this field is required!</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="gap-2 !justify-between !pl-3 !pr-3">
+        <a mat-button type="link" [routerLink]="['/auth/reset-password']">
+          Forgot Password?</a
+        >
+        <div class="flex gap-2">
+          <a mat-raised-button type="link" [routerLink]="['/auth/register']"
+            >Register</a
+          >
+
+          <button mat-flat-button color="tertiary" type="submit">Submit</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
+
+

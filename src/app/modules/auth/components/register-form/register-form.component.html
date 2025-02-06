@@ -1,0 +1,106 @@
+<div class="login-form-container w-300">
+  <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="login-card">
+      <mat-card-header >
+        <mat-card-title class="!p-4" >Registeration Form </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="!pl-8 !pr-8"  >
+        <mat-grid-list cols="12" rowHeight="1:3" gutterSize="16px">
+          <mat-grid-tile colspan="6">
+            <mat-form-field class="full-width">
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="user_name" required />
+              <mat-error>this field is required!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="6">
+            <mat-form-field class="full-width">
+              <mat-label>Password</mat-label>
+              <input
+                formControlName="password"
+                matInput
+                [type]="hide ? 'password' : 'text'"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="onShowPasswordClick($event)"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+              <mat-error>this field is required!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="12" rowHeight="1:3" gutterSize="16px">
+          <mat-grid-tile colspan="12">
+            <mat-form-field class="full-width">
+              <mat-label>Enter your email</mat-label>
+              <input matInput type="email" formControlName="email" required />
+              <mat-error>this field is required!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="12" rowHeight="1:3" gutterSize="16px">
+          <mat-grid-tile colspan="6">
+            <mat-form-field class="full-width">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="first_name" required />
+              @if (registerForm.get('first_name')?.invalid) {
+              <mat-error>this field is required!</mat-error>
+              }
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="6">
+            <mat-form-field class="full-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="last_name" required />
+              <mat-error>this field is required!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="12" rowHeight="1:3" gutterSize="16px">
+          <mat-grid-tile colspan="12">
+            <mat-form-field class="full-width">
+              <mat-label>Choose a date</mat-label>
+              <input
+                matInput
+                (dateChange)="onDateChange($event)"
+                [matDatepicker]="picker"
+              />
+              <mat-hint >MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="12" rowHeight="1:3" gutterSize="16px">
+          <mat-grid-tile  colspan="12">
+            <mat-radio-group
+              formControlName="gender"
+              aria-label="Select an option"
+              class="!w-full flex !justify-start !items-center gap-2 !justify-start"
+            >
+              <mat-radio-button value="male">Male</mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button>
+            </mat-radio-group>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+      <mat-card-actions class="!flex-row-reverse !justify-between !pl-3 !pr-3">
+        <button mat-flat-button color="primary" type="submit">
+          Register
+        </button>
+        <a mat-raised-button type="link" [routerLink]="['/auth/login']"
+          >Already have an account</a
+        >
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

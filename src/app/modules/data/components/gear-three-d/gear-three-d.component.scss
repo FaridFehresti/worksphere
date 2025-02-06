@@ -1,0 +1,8 @@
+.model-container {
+    position: relative; /* Establish a stacking context */
+    width: 350px; /* Adjust width as needed */
+    height: 315px; /* Adjust height as needed */
+    overflow: hidden; /* Prevent model from overflowing */
+
+  }
+  

@@ -1,0 +1,139 @@
+<div class="data-container flex h-full">
+    <div class="data-left-content-container flex gap-4 w-full h-full  items-center">
+        <div class="stat-navigation-side-bar-container h-fit flex flex-col py-1 gap-9">
+            <button mat-icon-button [routerLink]="'/data'" [queryParams]="{type:'overview'}"  class="icon-view_comfy" [class.selected]="routingParam === 'overview'"></button>
+            <button mat-icon-button [routerLink]="'/data'" [queryParams]="{type:'tasks'}" class="icon-checkbox-checked"[class.selected]="routingParam === 'tasks'"></button>
+            <button mat-icon-button [routerLink]="'/data'" [queryParams]="{type:'goals'}" class="icon-flag" [class.selected]="routingParam === 'goals'"></button>
+            <button mat-icon-button [routerLink]="'/data'" [queryParams]="{type:'skills'}" class="icon-account_tree" [class.selected]="routingParam === 'skills'"></button>
+            <button mat-icon-button [routerLink]="'/data'" [queryParams]="{type:'finance'}" class="icon-credit-card" [class.selected]="routingParam === 'finance'"></button>
+            <button mat-icon-button [routerLink]="'/data'" [queryParams]="{type:'calendar'}" class="icon-calendar" [class.selected]="routingParam === 'calendar'"></button>
+        </div>
+        @if(routingParam === 'overview') {
+            <div class="left-side-bar-content h-full w-full flex flex-col gap-4">
+                <div class="left-side-bar-content-grid-items grid gap-4 grid-cols-2 grid-rows-2 w-full">
+                    <mat-card class="">
+                        <mat-card-header>
+                            <mat-card-title>Finance's</mat-card-title>
+                            <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="text-text">
+                            Text content
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="">
+                        <mat-card-header>
+                            <mat-card-title>Learning</mat-card-title>
+                            <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="text-text">
+                            Text content
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="">
+                        <mat-card-header>
+                            <mat-card-title>Goal Deadline</mat-card-title>
+                            <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="text-text">
+                            Text content
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="">
+                        <mat-card-header>
+                            <mat-card-title>Goal Progress</mat-card-title>
+                            <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="text-text">
+                            Text content
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <mat-card class="w-full h-full">
+                    <mat-card-header>
+                        <mat-card-title>Active Task</mat-card-title>
+                        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="text-text">
+                        Text content
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="w-full h-full">
+                    <mat-card-header>
+                        <mat-card-title>AVG Behavior</mat-card-title>
+                        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="text-text">
+                        Text content
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        }
+                   
+    </div>
+    @switch (routingParam) {
+        @case('overview'){
+            <div class="center-data-content-container flex flex-col px-4 w-full h-full justify-between">
+        
+                <app-gear-three-d class="flex justify-center items-center"></app-gear-three-d>
+                <mat-card class="">
+                    <mat-card-header>
+                        <mat-card-title>Today</mat-card-title>
+                        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="text-text">
+                        Text content
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            
+            <div class="data-left-content-container flex flex-col gap-4 w-full h-full">
+                
+                <mat-card class="w-full h-full">
+                    <mat-card-header>
+                        <mat-card-title>Recent Achievements</mat-card-title>
+                        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="text-text">
+                        Text content
+                    </mat-card-content>
+                    
+                </mat-card>
+                <mat-card class="w-full h-full">
+                    <mat-card-header>
+                        <mat-card-title>Skill Tree</mat-card-title>
+                        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="text-text">
+                        Text content
+                    </mat-card-content>
+                    
+                </mat-card>
+                <mat-card class="w-full h-full" >
+                    <mat-card-header>
+                        <mat-card-title>Up Coming Events</mat-card-title>
+                        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="text-text">
+                        Text content
+                    </mat-card-content>
+                    
+                </mat-card>
+                <mat-card class="w-full h-full" >
+                    <mat-card-header>
+                        <mat-card-title>AVG Active hour</mat-card-title>
+                        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="text-text">
+                        Text content
+                    </mat-card-content>
+                    
+                </mat-card>
+            </div>
+        }
+        @case('tasks'){
+            <app-data-tasks class="w-full"></app-data-tasks>
+        }
+    }
+    
+    
+</div>
