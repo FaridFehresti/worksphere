@@ -20,6 +20,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { AnimationTesterComponent } from 'src/app/shared/components/animation-tester/animation.component';
+import { HolographicBackgroundComponent } from 'src/app/shared/components/three-d-model/three-d-model.component';
 
 
 const MAT = [
@@ -49,6 +50,7 @@ const PAGES = [
     ...MAT,
     AnimationTesterComponent,
     AuthRoutingModule,
+    HolographicBackgroundComponent
   ],
   providers:[
     {

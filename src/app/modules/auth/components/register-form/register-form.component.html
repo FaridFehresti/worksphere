@@ -2,7 +2,8 @@
   <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmit()">
     <mat-card class="login-card">
       <mat-card-header >
-        <mat-card-title class="!p-4" >Registeration Form </mat-card-title>
+        <mat-card-title class="!pb-4" >Create Your Worksphere Account</mat-card-title>
+        <p class="text-sm">Join our community and unlock your workspace potential.</p>
       </mat-card-header>
       <mat-card-content class="!pl-8 !pr-8"  >
         <mat-grid-list cols="12" rowHeight="1:3" gutterSize="16px">
@@ -97,7 +98,7 @@
         <button mat-flat-button color="primary" type="submit">
           Register
         </button>
-        <a mat-raised-button type="link" [routerLink]="['/auth/login']"
+        <a mat-raised-button color="secondary" type="link" [routerLink]="['/auth/login']"
           >Already have an account</a
         >
       </mat-card-actions>

@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SettingComponent } from './shared/components/setting/setting.component';
 import { ProfileComponent } from './shared/components/profile/profile.component';
 import { CircularMenuComponent } from './shared/components/circular-menu/circular-menu.component';
+import { HolographicBackgroundComponent } from './shared/components/three-d-model/three-d-model.component';
 
 
 const COMPONENTS = [
@@ -30,6 +31,7 @@ const COMPONENTS = [
     ProfileComponent,
     CircularMenuComponent,
     MatButtonModule,
+    HolographicBackgroundComponent
   ],
   providers: [
     {

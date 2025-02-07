@@ -1,10 +1,12 @@
 <div class="login-form-container w-300">
   <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
-    <mat-card class="login-card">
+    <mat-card >
       <mat-card-header >
-        <mat-card-title class="!p-4">Login Form</mat-card-title>
+        <mat-card-title >Get to Work </mat-card-title>
+        <p class="text-sm">Enter your credentials to access your Work Space.</p>
       </mat-card-header>
-      <mat-card-content class="!pl-8 !pr-8">
+      <mat-card-content >
+
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
@@ -39,16 +41,16 @@
           </div>
         </div>
       </mat-card-content>
-      <mat-card-actions class="gap-2 !justify-between !pl-3 !pr-3">
-        <a mat-button type="link" [routerLink]="['/auth/reset-password']">
+      <mat-card-actions >
+        <a  mat-button type="link" [routerLink]="['/auth/reset-password']">
           Forgot Password?</a
         >
         <div class="flex gap-2">
-          <a mat-raised-button type="link" [routerLink]="['/auth/register']"
+          <a mat-raised-button color="secondary"   type="link" [routerLink]="['/auth/register']"
             >Register</a
           >
 
-          <button mat-flat-button color="tertiary" type="submit">Submit</button>
+          <button mat-flat-button  color="primary" type="submit">Submit</button>
         </div>
       </mat-card-actions>
     </mat-card>

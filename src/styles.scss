@@ -37,3 +37,152 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-radius: 5px;
     border: 2px solid #003737;
   }
+
+  :root{
+   
+    --primary: #E5B8F4;
+    --secondary: #C147E9;
+    --tertiary: #32161F;
+    --body: #232323;
+    --secondaryBody: #232323;
+    --tertiaryBody: #547AA5;
+    --success: #499F68;
+    --error: #FA7070;
+    --warning: #FFC53A;
+    --white: #f2f2f2;
+    --black: #0F0E0E;
+    --lightText: #fdfdfd;
+    --darkText: #464646;
+    --gray: #cecccc;
+    --border:#3b3b3b;
+    
+  }
+
+  .card {
+  
+    background: var(--secondaryBody); /* Semi-transparent black */
+    border-radius: 8px !important; /* Rounded corners */
+    position: relative !important;
+    z-index: 999999;
+    background-clip: padding-box !important; /* Ensure background is clipped inside the border */
+}
+
+.card::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100px !important;
+  height: 100px !important;
+  margin: -2px;
+  pointer-events: none !important;
+  z-index: -1 !important; /* Push behind content */
+  background-image: radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 40%) !important; /* Adjusted gradient */
+  border-radius: 8px;
+}
+
+.card::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  width: 100px !important;
+  height: 100px !important;
+  margin: -2px;
+  pointer-events: none !important;
+  z-index: -1 !important; /* Push behind content */
+  background-image: radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 40%) !important; /* Adjusted gradient */
+  border-radius: 8px;
+}
+.mat-mdc-card{
+  background-color: var(--secondaryBody) !important;
+  color: var(--lightText) !important;
+  border: 0.5px solid var(--border) !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px !important;
+}
+.mat-mdc-card-header{
+  color: var(--lightText) !important;
+  padding: 0px !important;
+}
+.mat-mdc-card-content{
+  color: var(--lightText) !important;
+  padding: 0px !important;
+}
+.mat-mdc-card-actions{
+  color: var(--lightText) !important;
+  padding: 0px !important;
+}
+.mdc-button {
+  border-radius: 8px !important;
+}
+.mdc-button.mat-primary{
+  background-color: var(--white) !important;
+  color: var(--black) !important;
+}
+.mdc-button.mat-secondary{
+  background-color: var(--secondaryBody) !important;
+  color: var(--lightText) !important;
+  box-shadow: none !important;
+  border: 0.5px solid var(--border) !important;
+}
+.mat-mdc-text-field-wrapper{
+  background-color: var(--black) !important;
+  border-radius: 8px !important;
+  border: 0.5px solid var(--border) !important;
+  margin-top: 4px !important;
+  transition: all 0.5s ease;
+
+}
+.mat-mdc-text-field-wrapper:focus{
+  border-color: var(--white) !important;
+}
+.mdc-text-field--focused{
+  border-color: var(--white) !important;
+  
+}
+.mdc-line-ripple--active::after{
+  border: none !important;
+}
+.mdc-line-ripple::before{
+  border-color:transparent !important;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label, .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label--float-above{
+  color: var(--white) !important;
+}
+.mat-mdc-form-field-error{
+  color: var(--error) !important;
+}
+.mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label, .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label--float-above{
+  color: var(--error) !important;
+}
+
+.mat-button .mat-button-focus-overlay {
+  background-color: transparent;
+}
+  
+.mat-mdc-button:hover .mat-mdc-button-persistent-ripple::before{
+  opacity: 0.3 !important;
+  background-color: var(--border);
+}
+.mat-mdc-raised-button:hover .mat-mdc-button-persistent-ripple::before{
+  opacity: 0.3 !important;
+  background-color: var(--border);
+}
+.mat-mdc-raised-button:hover .mat-mdc-button-persistent-ripple::after{
+  opacity: 0.3 !important;
+  background-color: var(--border);
+}
+.mat-mdc-button{
+  color: var(--white) !important;
+}
+.mat-mdc-card-header{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
