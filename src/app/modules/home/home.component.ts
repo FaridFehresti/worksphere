@@ -16,9 +16,10 @@ export class HomeComponent implements OnInit{
   constructor(private router:Router,private authOp: AuthOperationService) {
   }
   onClick(){
-    this.userSub = this.authOp.getUsers().subscribe({
+    this.userSub = this.authOp.getUser().subscribe({
       next: res => {
-        this.data = res
+        this.data = res;
+        localStorage.setItem('user', JSON.stringify(res));
       },
       error: err => {
       },

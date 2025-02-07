@@ -17,10 +17,11 @@ export class AuthOperationService {
     RegisterUser(body:any): Observable<any> {
       return this.http.post<any>(this.apiConfig.authUrls.register, body);
     }
-    getUsers(){
+    getUser(){
       return this.http.get<any>(this.apiConfig.userUrls.getUser);
     }
     logOut(){
       this.authService.removeToken()
     }
+    
 }

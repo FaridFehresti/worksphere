@@ -1,12 +1,17 @@
 
 <button [matMenuTriggerFor]="menu" matBadge="1" mat-icon-button class="icon-user-tie">
+  
     <mat-menu #menu="matMenu">
-
-        <button mat-menu-item>Item 2</button>
-        <button  mat-menu-item>
+        @if(userData){
+            <span class="user-name text-white p-3">
+                {{userData.first_name + ' ' + userData.last_name}}   
+            </span>
+        }
+        <button class="flex  gap-1 items-center justify-center"  mat-menu-item>
             <app-confirm-popup [title]="'Logout'" [description]="'Are you sure you want to logout?'" (onConfirm)="onLogOut()"></app-confirm-popup>
 
         </button>
 
 
 </mat-menu>
+</button>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthOperationService } from '../../services/auth-operation.service';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-register-form',
@@ -24,7 +26,8 @@ export class RegisterFormComponent {
     birthdate:[''],
     gender:['male', Validators.required]
   });
-  constructor(private authOp:AuthOperationService, private fb:FormBuilder) {
+  showSpsinner = false;
+  constructor(private spinner: NgxSpinnerService,private authOp:AuthOperationService, private fb:FormBuilder, private router:Router) {
 
 
   }
@@ -34,7 +37,10 @@ export class RegisterFormComponent {
   
 
   onSubmit(): void {
+    
     if (this.registerForm.valid) {
+      this.showSpsinner = true;
+      this.spinner.show();
       let data = {
         email: this.registerForm.value.email!,
         password: this.registerForm.value.password!,
@@ -45,6 +51,12 @@ export class RegisterFormComponent {
         gender:this.registerForm.value.gender!
       }
       this.registerSub = this.authOp.RegisterUser(data).subscribe(res => {
+        if(res.id){
+          this.showSpsinner = false;
+          this.spinner.hide();
+
+          this.router.navigate(['/']);
+        }
       })
     }
   }

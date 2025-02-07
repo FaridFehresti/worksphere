@@ -1,4 +1,8 @@
-<div
+
+
+<div class="data-task-conainer w-full flex flex-col gap-2 overflow-x-auto" >
+  <app-task-form></app-task-form>
+  <div
   cdkDropList
   #todoList="cdkDropList"
   [cdkDropListData]="todo"
@@ -51,3 +55,5 @@
     }
     
   </div>
+
+</div>

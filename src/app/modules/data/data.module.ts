@@ -5,14 +5,22 @@ import { DataComponent } from './data.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { DataTasksComponent } from './components/data-tasks/data-tasks.component';
-import {
-  CdkDrag,
-  CdkDropList,
-} from '@angular/cdk/drag-drop';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {FormsModule} from '@angular/forms';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatChipsModule} from '@angular/material/chips';
+import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogTitle, MatDialogContent } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core'; // ✅ Import MatNativeDateModule
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../auth/interceptors/auth-interceptor';
+
+import { DataTaskForm, DataTaskFormDialog } from './components/data-tasks/components/data-tasks-form/data-task-form/data-task-form.component';
 
 const MAT = [
   MatButtonModule,
@@ -21,26 +29,33 @@ const MAT = [
   FormsModule,
   MatDividerModule,
   MatChipsModule,
-
-
-  
+  MatDialogTitle,
+  MatDialogContent,
+  MatGridListModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule, // ✅ Add this
+  MatIconModule,
 ];
-const PAGES = [
-    
-];
+
 const COMPONENTS = [
   GearThreeDComponent,
   DataComponent,
   DataTasksComponent,
-]
+  DataTaskForm,
+  DataTaskFormDialog,
+];
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [DataRoutingModule,
-    CdkDrag,
-    CdkDropList,
-    ...MAT,
+  imports: [DataRoutingModule, CdkDrag, CdkDropList, ReactiveFormsModule, ...MAT],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    provideNativeDateAdapter(), // ✅ Keep this
   ],
-  providers:[]
 })
 export class DataModule { }

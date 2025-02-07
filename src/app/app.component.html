@@ -15,16 +15,16 @@
     }@else {
         <div class="relative main-layout-container px-10 py-8 flex flex-row-reverse  h-fit">
             <div class="main-header-layout flex flex-row gap-2 h-fit ">
-                
-                <app-profile></app-profile>
-                <app-setting></app-setting>
                 @if(!isHome){
                     <button mat-icon-button (click)="openCircularMenu()" class="icon-menu">
                     </button>
                     
                     
                 }
-                
+                <app-setting></app-setting>
+               
+                <app-profile></app-profile>
+
 
                 
             </div>
