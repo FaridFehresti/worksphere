@@ -212,3 +212,39 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-dialog-actions{
   background-color: var(--secondaryBody) !important;
 }
+.mat-mdc-option{
+  background-color: var(--secondaryBody) !important;
+}
+.mat-mdc-option:hover{
+  background-color: var(--border) !important;
+}
+.mdc-list-item--selected{
+  background-color: var(--border) !important;
+}
+.mat-mdc-select-panel{
+  background-color: var(--secondaryBody) !important;
+}
+.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow{
+  color: var(--primary) !important;
+}
+.mat-datepicker-content-container{
+  border-radius:8px !important;
+  background-color: var(--secondaryBody) !important;
+}
+.mat-datepicker-actions > .mat-mdc-button{
+  border: 1px solid var(--border) !important;
+  
+}
+.mat-datepicker-actions >.mat-mdc-raised-button{
+  color: var(--white) !important;
+}
+.mat-calendar-body-selected{
+  background-color: var(--gray) !important;
+  color: var(--black) !important;
+}
+.mat-calendar-body-in-range::before{
+  background-color: var(--darkText) !important;
+}
+.mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical){
+  border: 1px solid var(--gray) !important;
+}

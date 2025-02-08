@@ -12,6 +12,7 @@ import { SettingComponent } from './shared/components/setting/setting.component'
 import { ProfileComponent } from './shared/components/profile/profile.component';
 import { CircularMenuComponent } from './shared/components/circular-menu/circular-menu.component';
 import { HolographicBackgroundComponent } from './shared/components/three-d-model/three-d-model.component';
+import { NativeDateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 
 
 const COMPONENTS = [
@@ -40,6 +41,7 @@ const COMPONENTS = [
       multi: true,
     },
     provideAnimationsAsync(),
+    provideNativeDateAdapter()
   ],
 
   bootstrap: [AppComponent] ,

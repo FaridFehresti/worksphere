@@ -25,6 +25,11 @@ export class DataTaskForm  {
 })
 export class DataTaskFormDialog {
   data = inject(MAT_DIALOG_DATA);
+  foods: any[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'},
+  ];
   constructor(private fb: FormBuilder) { }
   taskForm = this.fb.group({
     title:['', Validators.required],
@@ -33,7 +38,8 @@ export class DataTaskFormDialog {
     deadline:[''],
     last_name:['', Validators.required],
     birthdate:[''],
-    gender:['male', Validators.required]
+    gender:['male', Validators.required],
+    category:['', Validators.required]
   });
   onSubmit(): void {
     console.log(this.taskForm.value);

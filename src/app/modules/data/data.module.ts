@@ -15,12 +15,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core'; // ✅ Import MatNativeDateModule
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../auth/interceptors/auth-interceptor';
 
 import { DataTaskForm, DataTaskFormDialog } from './components/data-tasks/components/data-tasks-form/data-task-form/data-task-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 const MAT = [
   MatButtonModule,
@@ -34,8 +36,9 @@ const MAT = [
   MatGridListModule,
   MatInputModule,
   MatDatepickerModule,
-  MatNativeDateModule, // ✅ Add this
   MatIconModule,
+  MatFormFieldModule,
+  MatSelectModule
 ];
 
 const COMPONENTS = [
@@ -55,7 +58,7 @@ const COMPONENTS = [
       useClass: AuthInterceptor,
       multi: true,
     },
-    provideNativeDateAdapter(), // ✅ Keep this
+    provideNativeDateAdapter(), 
   ],
 })
 export class DataModule { }
