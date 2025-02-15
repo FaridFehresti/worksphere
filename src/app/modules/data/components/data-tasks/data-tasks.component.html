@@ -1,59 +1,72 @@
-
-
-<div class="data-task-conainer w-full flex flex-col gap-2 overflow-x-auto" >
-  <app-task-form></app-task-form>
-  <div
-  cdkDropList
-  #todoList="cdkDropList"
-  [cdkDropListData]="todo"
-  class="example-list"
-  (cdkDropListDropped)="drop($event)"
->
-    @for(task of listOfTasks; track $index){
-      <div  class="dragable-item" cdkDrag>
-
-      <mat-card>
-        <mat-card-header class="flex justify-between items-center w-full">
-          <mat-card-title>
-            {{ task.name }}
-            <span class="text-text text-sm">({{ task.description }})</span>
-          </mat-card-title>
-          <mat-checkbox
-            class="example-margin"
-            [checked]="task.completed"
-            [color]="task.color"
-            [indeterminate]="someComplete(task)"
-            (change)="setAll($event.checked, task)"
-          >
-          </mat-checkbox>
-        </mat-card-header>
-        <mat-divider class="!mx-4 !border-t-text"></mat-divider>
-  
-        <mat-card-content class="!flex !flex-col">
-          @for (subtask of task.subtasks; track $index) {
-            <mat-checkbox
-            [(ngModel)]="subtask.completed"
-            [color]="subtask.color"
-            (ngModelChange)="updateAllComplete(task)"
-          >
-            {{ subtask.name }}
-          </mat-checkbox>
-          }
-          
-        </mat-card-content>
-        <mat-card-footer class="flex gap-2">
-          <mat-chip-set class="p-4" aria-label="Fish selection">
-            @for (tag of task.tags; track $index) {
-              <mat-chip >{{ tag }}</mat-chip>
-
-            }
-          </mat-chip-set>
-        </mat-card-footer>
-      </mat-card>
-    </div>
-
-    }
-    
+<div class="data-task-conainer w-full  rounded-xl flex flex-col gap-2 overflow-x-auto bg-secondaryBody p-2 ">
+  <div class="flex gap-2">
+    <app-task-form></app-task-form>
+    <app-task-category-form></app-task-category-form>
   </div>
+  <mat-tab-group
+    (selectedTabChange)="handleTabChange($event)"
+    mat-stretch-tabs="false"
+    mat-align-tabs="start"
+  >
+    <mat-tab label="All"> works</mat-tab>
 
+    @if(listOfTaskCategories && listOfTaskCategories.length > 0){ @for(category
+    of listOfTaskCategories; track $index){
+    <mat-tab [tabIndex]="category.id" [label]="category.title">
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="todo"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for(task of listOfTasks; track $index){
+        <div class="dragable-item" cdkDrag>
+          <mat-card>
+            <mat-card-header class="flex justify-between items-center w-full">
+              <mat-card-title>
+                {{ task.name }}
+                <span class="text-text text-sm">({{ task.description }})</span>
+              </mat-card-title>
+              <mat-checkbox
+                class="example-margin"
+                [checked]="task.completed"
+                [color]="task.color"
+                [indeterminate]="someComplete(task)"
+                (change)="setAll($event.checked, task)"
+              >
+              </mat-checkbox>
+            </mat-card-header>
+            <mat-divider class="!mx-4 !border-t-text"></mat-divider>
+
+            <mat-card-content class="!flex !flex-col">
+              @for (subtask of task.subtasks; track $index) {
+              <mat-checkbox
+                [(ngModel)]="subtask.completed"
+                [color]="subtask.color"
+                (ngModelChange)="updateAllComplete(task)"
+              >
+                {{ subtask.name }}
+              </mat-checkbox>
+              }
+            </mat-card-content>
+            <mat-card-footer class="flex gap-2">
+              <mat-chip-set class="p-4" aria-label="Fish selection">
+                @for (tag of task.tags; track $index) {
+                <mat-chip>{{ tag }}</mat-chip>
+
+                }
+              </mat-chip-set>
+            </mat-card-footer>
+          </mat-card>
+        </div>
+
+        }@empty {
+          <app-empty-list [message]="'No taaks found for you!'"></app-empty-list>
+        }
+      </div>
+    </mat-tab>
+
+    } }
+  </mat-tab-group>
 </div>

@@ -1,0 +1,33 @@
+<mat-dialog-content>
+  <form
+    class="data-task-form"
+    [formGroup]="taskCategoryForm"
+    novalidate
+    (ngSubmit)="onSubmit()" 
+  >
+    <div class="example-container flex flex-col gap-2 items-end">
+      <div class="row">
+        <mat-form-field class="w-full">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            placeholder="task name"
+            formControlName="title"
+            required
+          />
+          <mat-error>this field is required!</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="btn-container flex flex-row gap-2">
+        <button class="w-fit" (click)="handleCancel()" mat-flat-button color="error">
+          cancel 
+        </button>
+        <button class="w-fit" type="submit" mat-flat-button color="primary">
+          Create Category
+          <mat-icon>add_box</mat-icon>
+        </button>
+        
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>

@@ -14,4 +14,23 @@ export class APIConfig {
     userUrls = {
         getUser: this.api_core + '/user',
     }
+    taskCategoryUrls={
+            getTaskCategoryList: this.api_core + '/task/task-category/task-categories',
+            postTaskCategory: this.api_core + '/task/task-category/task-categories',//body
+            getTaskCategoryById: this.api_core + '/task/task-category/task-categories/',//id
+            patchTaskCategoryById: this.api_core + '/task/task-category/task-categories/',//id
+            deleteTaskCategoryById: this.api_core + '/task/task-category/task-categories/',//id
+    }
+    tagUrls={
+        getTagList: this.api_core + '/tag/tags',
+        postTag: this.api_core + '/tag/tags',//body
+        deleteTag: this.api_core + '/tag/tags/',//id
+    }
+    taskUrls={
+        getTasksList: this.api_core + '/task/tasks',
+        postTask: this.api_core + '/task/tasks',//body
+        getTaskById: this.api_core + '/task/tasks/',//id
+        patchTaskById: this.api_core + '/task/tasks/',//id
+        deleteTaskById: this.api_core + '/task/tasks/',//id
+    }
 }

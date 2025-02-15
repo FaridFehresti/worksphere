@@ -13,24 +13,18 @@
 
         </div>
     }@else {
-        <div class="relative main-layout-container px-10 py-8 flex flex-row-reverse  h-fit">
-            <div class="main-header-layout flex flex-row gap-2 h-fit ">
-                @if(!isHome){
-                    <button mat-icon-button (click)="openCircularMenu()" class="icon-menu">
-                    </button>
-                    
-                    
-                }
-                <app-setting></app-setting>
+        <div class="fixed top-0 left-0 w-full px-10 py-2 flex flex-row-reverse bg-body  z-50">
+            <div class="main-header-layout flex flex-row gap-2 h-fit">
                
+                <app-setting></app-setting>
                 <app-profile></app-profile>
-
-
-                
+                @if(!isHome){
+                    <button mat-icon-button (click)="openCircularMenu()" class="icon-menu"></button>
+                }
             </div>
-    
         </div>
-        <div class="main-layout px-10 overflow-y-hidden overflow-x-hidden h-screen" style="height: 80vh;">
+        
+        <div class="main-layout px-10 overflow-y-hidden overflow-x-hidden h-screen bg-body" style="height: screen;">
             <router-outlet></router-outlet>
     
         </div>

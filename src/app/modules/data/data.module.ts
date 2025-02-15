@@ -19,10 +19,13 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../auth/interceptors/auth-interceptor';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { DataTaskForm, DataTaskFormDialog } from './components/data-tasks/components/data-tasks-form/data-task-form/data-task-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { DataTaskCategoryForm, DataTaskCategoryFormDialog } from './components/data-tasks/components/data-task-category-form/data-task-form-category.component';
+import { EmptyListComponent } from 'src/app/shared/components/empty-list/empty-list/empty-list.component';
 
 const MAT = [
   MatButtonModule,
@@ -38,7 +41,9 @@ const MAT = [
   MatDatepickerModule,
   MatIconModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTabsModule,
+  EmptyListComponent
 ];
 
 const COMPONENTS = [
@@ -47,6 +52,9 @@ const COMPONENTS = [
   DataTasksComponent,
   DataTaskForm,
   DataTaskFormDialog,
+  DataTaskCategoryForm,
+  DataTaskCategoryFormDialog,
+  
 ];
 
 @NgModule({

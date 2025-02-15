@@ -3,8 +3,11 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { DataOperationService } from '../../data-operation.service';
+import { Subscription } from 'rxjs';
+import { ITaskCategory } from 'src/app/shared/interfaces/types';
 
 export interface Task {
   name: string;
@@ -21,12 +24,59 @@ export interface Task {
   templateUrl: './data-tasks.component.html',
   styleUrl: './data-tasks.component.scss',
 })
-export class DataTasksComponent {
+export class DataTasksComponent implements OnInit, OnDestroy{
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
   allComplete: boolean = false;
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
-
-
+  listOfTaskCategories:ITaskCategory[] = []
+  taskCategoriesSubscription:Subscription | null = null;
+  tasksSubscription:Subscription | null = null;
+  selecteCategoryId:number | null = 0;
+  constructor(private dataOp: DataOperationService) {
+    
+  }
+  ngOnInit(): void {
+   this.intialData()
+  }
+  intialData(){
+    this.getListOfTaskCategories();
+    this.getListOfTaks(0);
+  }
+  ngOnDestroy(): void {
+    
+      this.taskCategoriesSubscription?.unsubscribe()
+    
+  }
+  getListOfTaskCategories(){
+    this.taskCategoriesSubscription = this.dataOp.getTaskCategoryList().subscribe({next:(res) => {
+      console.log('got:',res);
+      this.listOfTaskCategories = res;
+    },error:(err) => {
+      console.log(err)
+    },complete:() => {
+      
+    }})
+  }
+  getListOfTaks(categoryId:number){
+    let selectedCategoryId:number = categoryId
+    if(selectedCategoryId  > 0){
+      this.tasksSubscription = this.dataOp.getTasksList(selectedCategoryId).subscribe({next:(res) => {
+        console.log(res)  
+        this.listOfTasks =res
+      }})
+    }else{
+      this.tasksSubscription = this.dataOp.getTasksList().subscribe({next:(res) => {
+        console.log(res)  
+        this.listOfTasks =res
+      }})
+    }
+    
+  }
+  handleTabChange(event: any) {
+    console.log(event.index)
+    this.selecteCategoryId = event.index;
+    this.getListOfTaks(event.index);
+  }
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -127,5 +177,10 @@ export class DataTasksComponent {
       task.subtasks.forEach(subtask => subtask.completed = completed);
       this.updateAllComplete(task);
     }
+  }
+  addTask() {
+    this.dataOp.getTaskCategoryList().subscribe((res) => {
+      console.log(res);
+    })
   }
 }

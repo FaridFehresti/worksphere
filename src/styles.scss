@@ -49,8 +49,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --primary: #E5B8F4;
     --secondary: #C147E9;
     --tertiary: #32161F;
-    --body: #232323;
-    --secondaryBody: #232323;
+    --body: #31363F;
+    --secondaryBody: #222831;
     --tertiaryBody: #547AA5;
     --success: #499F68;
     --error: #FA7070;
@@ -175,6 +175,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   opacity: 0.3 !important;
   background-color: var(--border);
 }
+.mat-mdc-unelevated-button:not(:disabled).mat-error{
+  background-color: var(--error) !important;
+  color: var(--black);
+}
 .mat-mdc-raised-button:hover .mat-mdc-button-persistent-ripple::before{
   opacity: 0.3 !important;
   background-color: var(--border);
@@ -248,3 +252,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical){
   border: 1px solid var(--gray) !important;
 }
+.mat-mdc-tab.mdc-tab--active:focus .mdc-tab-indicator__content--underline{
+  border-color: var(--primary) !important;
+}
+.mat-mdc-tab.mdc-tab--active {
+  transition: all 0.5s ease;
+}
+.mat-mdc-tab.mdc-tab--active:focus {
+  background-color: var(--border) !important;
+}
+.mat-mdc-tab .mdc-tab-indicator__content--underline{
+  border-color: var(--primary) !important;
+
+}
+.not-found{
+  width: 200px;
+}
+
+
+
+
+
