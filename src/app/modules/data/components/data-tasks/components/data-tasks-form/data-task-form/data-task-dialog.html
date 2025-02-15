@@ -27,9 +27,8 @@
             type="number"
             placeholder="task hardness"
             formControlName="hardness"
-            required
+            
           />
-          <mat-error>this field is required!</mat-error>
         </mat-form-field>
         <mat-form-field class="w-1/4">
           <mat-label>Priority</mat-label>
@@ -38,9 +37,8 @@
             type="number"
             placeholder="task hardness"
             formControlName="priority"
-            required
+            
           />
-          <mat-error>this field is required!</mat-error>
         </mat-form-field>
       </div>
       <div class="row">
@@ -75,8 +73,8 @@
         <mat-form-field>
           <mat-label>Category</mat-label>
           <mat-select placeholder="select task cateogry">
-            @for (food of foods; track food) {
-              <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+            @for ( category of data.listOfCategories; track $index) {
+              <mat-option [value]="category.id">{{category.title}}</mat-option>
             }
           </mat-select>
         </mat-form-field>
@@ -84,3 +82,7 @@
     </div>
   </form>
 </mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button  (click)="onCancel()" color="error" >Cancel</button>
+  <button mat-flat-button   (click)="onSubmit() " color="primary">Create Task</button>
+</mat-dialog-actions>

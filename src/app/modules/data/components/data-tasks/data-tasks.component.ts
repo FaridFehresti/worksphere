@@ -32,15 +32,18 @@ export class DataTasksComponent implements OnInit, OnDestroy{
   taskCategoriesSubscription:Subscription | null = null;
   tasksSubscription:Subscription | null = null;
   selecteCategoryId:number | null = 0;
+  isLoading:boolean = false;
   constructor(private dataOp: DataOperationService) {
     
   }
   ngOnInit(): void {
    this.intialData()
   }
-  intialData(){
-    this.getListOfTaskCategories();
-    this.getListOfTaks(0);
+  async intialData(){
+    this.isLoading = true
+    await this.getListOfTaskCategories();
+    await this.getListOfTaks(0);
+    this.isLoading = false;
   }
   ngOnDestroy(): void {
     

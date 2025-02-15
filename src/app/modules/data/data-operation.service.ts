@@ -34,6 +34,9 @@ export class DataOperationService {
     
         return this.http.get<any>(this.apiConfig.taskUrls.getTasksList, { params });
     }
+    createTask(body:any): Observable<any> {
+        return this.http.post<any>(this.apiConfig.taskUrls.postTask, body);
+    }
     
     
     

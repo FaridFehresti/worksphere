@@ -10,7 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatDialogTitle, MatDialogContent } from '@angular/material/dialog';
+import { MatDialogTitle, MatDialogContent, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,6 +26,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { DataTaskCategoryForm, DataTaskCategoryFormDialog } from './components/data-tasks/components/data-task-category-form/data-task-form-category.component';
 import { EmptyListComponent } from 'src/app/shared/components/empty-list/empty-list/empty-list.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const MAT = [
   MatButtonModule,
@@ -34,6 +35,7 @@ const MAT = [
   FormsModule,
   MatDividerModule,
   MatChipsModule,
+  MatDialogModule,
   MatDialogTitle,
   MatDialogContent,
   MatGridListModule,
@@ -59,7 +61,7 @@ const COMPONENTS = [
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [DataRoutingModule, CdkDrag, CdkDropList, ReactiveFormsModule, ...MAT],
+  imports: [NgxSpinnerModule,DataRoutingModule, CdkDrag, CdkDropList, ReactiveFormsModule, ...MAT],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

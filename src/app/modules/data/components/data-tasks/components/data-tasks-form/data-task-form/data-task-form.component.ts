@@ -1,18 +1,21 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
+import { DataOperationService } from 'src/app/modules/data/data-operation.service';
+import { ITaskCategory, IUserData } from 'src/app/shared/interfaces/types';
 @Component({
   selector: 'app-task-form',
   templateUrl: 'data-task-form.component.html',
 })
 export class DataTaskForm  {
   dialog = inject(MatDialog);
- 
+  @Input() listOfCategories: ITaskCategory[] = [];
   
   openDialog() {
     this.dialog.open(DataTaskFormDialog, {
       data: {
-        animal: 'panda',
+        listOfCategories: this.listOfCategories,
       },
     });
   }
@@ -23,26 +26,55 @@ export class DataTaskForm  {
   styleUrl: 'data-task-form.component.scss'
   
 })
-export class DataTaskFormDialog {
+export class DataTaskFormDialog implements OnInit,OnDestroy {
   data = inject(MAT_DIALOG_DATA);
-  foods: any[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
-  constructor(private fb: FormBuilder) { }
+  createTask$:Subscription | null = null;
+  isLoading:boolean = false;
+  userData:IUserData = JSON.parse(localStorage.getItem('user') || '');
+  constructor(private dataOp:DataOperationService,private fb: FormBuilder,private dialog:MatDialog) { }
+  ngOnInit(): void {
+    
+  }
+  ngOnDestroy(): void {
+    this.createTask$?.unsubscribe()
+  }
   taskForm = this.fb.group({
-    title:['', Validators.required],
-    hardness:['', [Validators.required]],
-    priority:['', Validators.required],
-    deadline:[''],
-    last_name:['', Validators.required],
-    birthdate:[''],
-    gender:['male', Validators.required],
-    category:['', Validators.required]
+    title:[null,[Validators.required]],
+    hardness:[null],
+    priority:[null],
+    deadline:[null],
+    description:[null],
+    taskCategoryId:[null],
+    userId:[this.userData.id || null]
   });
+
+  validateForm(): boolean {
+    if (this.taskForm.valid) {
+      return true;
+    }
+    return false;
+  }
   onSubmit(): void {
-    console.log(this.taskForm.value);
+    if(this.validateForm()){
+      this.isLoading = true
+      this.createTask$ = this.dataOp.createTask(this.taskForm.value).subscribe({
+          next:(res) => {
+            console.log(res);
+            this.dialog.closeAll();
+            this.isLoading = false;
+          },error:(err) => {
+            console.log(err);
+            this.isLoading = false;
+          },complete:() => {
+            this.isLoading = false;
+          }
+      })
+    }else{
+      this.taskForm.markAllAsTouched();
+    }
+  }
+  onCancel(): void {
+    this.dialog.closeAll();
   }
   onDateChange(event:any){
     this.taskForm.controls['deadline'].patchValue(event.value)
