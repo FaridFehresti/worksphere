@@ -8,6 +8,7 @@ import { ThemePalette } from '@angular/material/core';
 import { DataOperationService } from '../../data-operation.service';
 import { Subscription } from 'rxjs';
 import { ITaskCategory } from 'src/app/shared/interfaces/types';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 export interface Task {
   name: string;
@@ -75,10 +76,19 @@ export class DataTasksComponent implements OnInit, OnDestroy{
     }
     
   }
-  handleTabChange(event: any) {
-    console.log(event.index)
-    this.selecteCategoryId = event.index;
-    this.getListOfTaks(event.index);
+  handleTabChange(event: MatTabChangeEvent) {
+    if (event.index === 0) {
+      // "All" tab selected
+      this.selecteCategoryId = null;
+    } else {
+      // Subtract 1 because the first tab is "All"
+      const selectedCategory = this.listOfTaskCategories[event.index - 1];
+      if (selectedCategory) {
+        this.selecteCategoryId = selectedCategory.id;
+        this.getListOfTaks(this.selecteCategoryId);
+      }
+    }
+    console.log('Selected Category ID:', this.selecteCategoryId);
   }
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {

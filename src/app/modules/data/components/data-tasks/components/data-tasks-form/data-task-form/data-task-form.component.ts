@@ -1,9 +1,9 @@
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { DataOperationService } from 'src/app/modules/data/data-operation.service';
-import { ITaskCategory, IUserData } from 'src/app/shared/interfaces/types';
+import {  ITaskCategory, ITaskFormData, IUserData } from 'src/app/shared/interfaces/types';
 @Component({
   selector: 'app-task-form',
   templateUrl: 'data-task-form.component.html',
@@ -39,14 +39,17 @@ export class DataTaskFormDialog implements OnInit,OnDestroy {
     this.createTask$?.unsubscribe()
   }
   taskForm = this.fb.group({
-    title:[null,[Validators.required]],
-    hardness:[null],
-    priority:[null],
-    deadline:[null],
-    description:[null],
-    taskCategoryId:[null],
-    userId:[this.userData.id || null]
+    title: new FormControl<string>('', [Validators.required]), 
+    hardness: new FormControl<number | null>(null),
+    priority: new FormControl<number | null>(null),
+    deadline: new FormControl<string | null>(null),
+    description: new FormControl<string | null>(null),
+    taskCategoryId: new FormControl<number | null>(null),
+    userId: new FormControl<number | null>(this.userData.id || null),
+    isComplete: new FormControl<boolean>(false),
+    createdBy: new FormControl<number>(this.userData.id),
   });
+  
 
   validateForm(): boolean {
     if (this.taskForm.valid) {

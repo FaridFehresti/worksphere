@@ -6,15 +6,15 @@
     <app-task-category-form></app-task-category-form>
   </div>
   <mat-tab-group
-    (selectedTabChange)="handleTabChange($event)"
-    mat-stretch-tabs="false"
-    mat-align-tabs="start"
-  >
-    <mat-tab label="All"> works</mat-tab>
+  (selectedTabChange)="handleTabChange($event)"
+  mat-stretch-tabs="false"
+  mat-align-tabs="start"
+>
+  <mat-tab label="All">works</mat-tab>
 
-    @if(listOfTaskCategories && listOfTaskCategories.length > 0){ @for(category
-    of listOfTaskCategories; track $index){
-    <mat-tab [tabIndex]="category.id" [label]="category.title">
+  @if(listOfTaskCategories && listOfTaskCategories.length > 0){
+    @for(category of listOfTaskCategories; track $index){
+      <mat-tab [label]="category.title">
       <div
         cdkDropList
         #todoList="cdkDropList"

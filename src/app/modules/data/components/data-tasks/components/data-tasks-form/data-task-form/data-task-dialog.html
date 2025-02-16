@@ -72,7 +72,7 @@
 
         <mat-form-field>
           <mat-label>Category</mat-label>
-          <mat-select placeholder="select task cateogry">
+          <mat-select formControlName="taskCategoryId" placeholder="select task cateogry">
             @for ( category of data.listOfCategories; track $index) {
               <mat-option [value]="category.id">{{category.title}}</mat-option>
             }

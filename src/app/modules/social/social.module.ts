@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SocialRoutingModule } from './social.routes';
 import { SocialComponent } from './social.component';
+import { HolographicRingComponent } from 'src/app/shared/components/3d-model-ring/three-d-ring/three-d-ring.component';
 
 const MAT = [
 
@@ -14,7 +15,7 @@ const COMPONENTS = [
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [],
+  imports: [HolographicRingComponent],
   providers:[SocialRoutingModule]
 })
 export class SocialModule { }

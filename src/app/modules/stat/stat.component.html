@@ -7,7 +7,6 @@
       <button mat-icon-button [routerLink]="'/stat'" [queryParams]="{type:'calendar'}" class="icon-calendar" [class.selected]="routingParam === 'calendar'"></button>
       <button mat-icon-button [routerLink]="'/stat'" [queryParams]="{type:'stack'}" class="icon-stack" [class.selected]="routingParam === 'stack'"></button>
     </div>
-    <app-three-d-model></app-three-d-model>
   </div>
   <div class="content-container w-full flex flex-col gap-4">
     @switch (routingParam) {
