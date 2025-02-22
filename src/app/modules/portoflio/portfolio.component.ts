@@ -34,10 +34,12 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   displayComponent:boolean = false;
   reactImage:string = '/images/react-white.png';
   serverImage:string = '/images/server-white.png';
+  expandRing:boolean =false;
   constructor(private route: ActivatedRoute) {}
   
   ngOnInit(): void {
     this.getCurrentParams();
+    this.onExprienceClick();
     setTimeout(()=>{
       this.animate();
     },10)
@@ -51,8 +53,15 @@ export class PortfolioComponent implements OnInit, OnDestroy {
       this.routingParam = params['type'];
     });
   }
+  onExprienceClick(){
+    this.expandRing = true;
 
+    setTimeout(()=>{
+      this.expandRing = false;
+    },3500)
+  }
   @HostListener('mousemove', ['$event'])
+  
   onMouseMove(event: MouseEvent): void {
     const mouseX = event.clientX;
     const mouseY = event.clientY;

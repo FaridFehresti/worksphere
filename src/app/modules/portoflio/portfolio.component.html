@@ -1,9 +1,10 @@
 <div class="main-portfolio-container text-black w-full h-screen flex">
   <div
-    class="main-info-container w-1/2 px-14 flex flex-col justify-center items-center"
+    class="overflow-hidden main-info-container w-1/2 px-14 flex flex-col justify-center items-center"
   >
-  <span class="backdrop"></span>
-  <app-holographic-ring></app-holographic-ring>
+  <span class="backdrop overflow-hidden"></span>
+    <app-holographic-ring [expandRing]="expandRing"></app-holographic-ring>
+
     <div class="my-info-container w-full">
       <h1 class="my-name">Farid Fehresti</h1>
       <h2 class="my-title">Full Stack Web Developer</h2>
@@ -12,11 +13,11 @@
       </p>
     </div>
     <div class="menu-container w-full flex flex-col gap-2">
-      <a class="menu-item-selected w-full" href="">
+      <a class="menu-item-selected w-full">
         <span class="link-line"></span>
         About
       </a>
-      <a class="menu-item" href=""> Expriences </a>
+      <span (click)="onExprienceClick()" class="menu-item cursor-pointer" > Expriences </span>
       <a
         class="menu-item"
         href="
