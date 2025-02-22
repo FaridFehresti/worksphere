@@ -32,70 +32,98 @@
   </div>
   <div class="scroller-container w-1/2 px-12 py-8 overflow-y-auto">
     <div class="about">
-      <div class="about-text-container py-4">
+      <div class="about-text-container py-4 flex flex-col gap-4">
         <p
-          [appTypewriter]="paragraphHtml"
-          [speed]="75"
-          [cursorSpeed]="500"
+          [appTypewriter]="paragraphHtml1"
+          [speed]="100"
+          [cursorSpeed]="100"
+          class="text-white "
+
+        ></p>
+        <p
+          [appTypewriter]="paragraphHtml2"
+          [speed]="100"
+          [cursorSpeed]="100"
+          class="text-white "
+
+        ></p>
+        <p
+          [appTypewriter]="paragraphHtml3"
+          [speed]="100"
+          [cursorSpeed]="100"
           class="text-white "
         ></p>
       </div>
       <div class="about-header-container flex flex-col gap-6">
-        <div
-          [@zoomInRight]="animationState"
-          class="header-card-item p-2 w-1/2"
-          [ngClass]="displayComponent ? '' : 'display-none'"
-        >
+        <!-- Frontend Developer Section -->
+        <div class="header-card-item p-2 w-1/2">
           <div class="card-header flex gap-4 items-center">
             <img class="icon-image mb-4" [src]="reactImage" alt="" />
             <div class="card-header-text-container flex flex-col text-white">
               <span class="text-2xl font-bold">Frontend Dev</span>
-              <span class="text-2xl font-bold">React,NextJs,Angular</span>
+              <span class="text-2xl font-bold">React, Next.js, Angular</span>
             </div>
           </div>
           <div class="card-header-content relative">
-            <div
-              class="tags-container flex flex-col justify-center w-fit items-center"
-            >
+            <div class="tags-container flex flex-col justify-center w-fit items-center">
               <span class="font-bold text-white">{{ "&lt;h3&gt;" }}</span>
               <span class="tag-line"></span>
               <span class="font-bold text-white">{{ "&lt;/h3&gt;" }}</span>
             </div>
-            <div class="text-content absolute text-inherit text-white">
-              Passionate about UI/UX. Over 5 years of development experience in
-              HTML, CSS, JS, React and NextJS frameworks.
-            </div>
+            <p appTypewriter="Experienced in building interactive, responsive user interfaces using React, Next.js, and Angular, focused on seamless user experience."
+               [speed]="50"
+               [cursorSpeed]="200"
+               class="text-content absolute text-inherit text-white">
+            </p>
           </div>
         </div>
-        <div [@zoomInRight]="animationState" class="header-card-item p-2">
+      
+        <!-- Backend Developer Section -->
+        <div class="header-card-item p-2">
           <div class="card-header flex gap-4 items-center">
             <img class="icon-image mb-4" [src]="serverImage" alt="" />
-
             <div class="card-header-text-container flex flex-col text-white">
-              <span class="text-2xl font-bold">Backend Dev </span>
-              <span class="text-2xl font-bold">NodeJs,NestJs</span>
+              <span class="text-2xl font-bold">Backend Dev</span>
+              <span class="text-2xl font-bold">NodeJs, NestJs</span>
             </div>
           </div>
           <div class="card-header-content relative">
-            <div
-              class="tags-container flex flex-col justify-center w-fit items-center"
-            >
+            <div class="tags-container flex flex-col justify-center w-fit items-center">
               <span class="font-bold text-white">{{ "&lt;h3&gt;" }}</span>
               <span class="tag-line"></span>
               <span class="font-bold text-white">{{ "&lt;/h3&gt;" }}</span>
             </div>
-            <div class="text-content absolute text-white">
-              Passionate about UI/UX. Over 5 years of development experience in
-              HTML, CSS, JS, React and NextJS frameworks.
-            </div>
+            <p appTypewriter="Specialized in developing scalable and secure backend systems using Node.js and NestJS to power robust web applications."
+               [speed]="50"
+               [cursorSpeed]="200"
+               class="text-content absolute text-inherit text-white">
+            </p>
           </div>
         </div>
       </div>
+      
     </div>
-    <div class="expriences">Expriences</div>
+    <div class="expriences">
+      @for(exprience of listOfExpriences ; track $index){
+        <div class="exprience-card">
+          <div class="date-container">
+            <span class="date">{{exprience.date}}</span>
+          </div>
+          <div class="content">
+            <span class="title">{{exprience.title}}</span>
+            <span class="description">{{exprience.description}}</span>
+           <div class="skills-container">
+            @for (skill of exprience.skils; track $index) {
+              <span class="skill-item">{{skill}}</span>
+            }
+           </div>
+          </div>
+        </div>
+      }
+
+    </div>
     <div class="stack">stack</div>
     <div class="projects">projects</div>
   </div>
   <div class="light" [ngStyle]="lightStyle"></div>
-  <!-- Use ngStyle to bind styles dynamically -->
 </div>

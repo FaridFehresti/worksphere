@@ -70,7 +70,6 @@
 }
 
 .header-card-item {
-  border: 2px solid var(--white);
   border-radius: 0;
   width: 100%;
   height: 250px;
@@ -93,7 +92,7 @@
 
 .tag-line {
   background-color: var(--white); /* Initial color */
-  height: 120px;
+  height: 80px;
   width: 3px;
   border-radius: 100px;
   transition: background-color 0.5s ease; /* Smooth transition */
@@ -114,4 +113,59 @@
   50% {
     opacity: 0;
   }
+}
+.expriences{
+  margin-top: 120px;
+}
+
+.exprience-card{
+  width: 100%;
+  border-radius: 8px;
+  padding: 16px 16px;
+  margin-bottom: 16px;
+  color: var(--white);
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.exprience-card:hover{
+  border-radius: 8px;
+  background-color: rgba(163, 29, 29, 0.3);;
+}
+.date{
+  font-size: 12px;
+  text-wrap: nowrap;
+}
+.date-container{
+  width: 85px;
+
+}
+.title{
+  font-weight: bold;
+  font-size: 24px;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 85%;
+  transition: all 0.5s ease;
+}
+
+.skills-container{
+  display: flex;
+  gap: 8px;
+}
+.skill-item{
+  border-radius: 99999px;
+  padding: 4px 12px;
+  background-color: #FF204E;
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+}
+.description{
+  color: var(--primary);
 }

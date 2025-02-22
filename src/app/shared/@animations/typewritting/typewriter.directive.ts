@@ -21,9 +21,10 @@ export class TypewriterDirective implements OnInit {
 
   startTyping() {
     const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = this.htmlContent.trim();
-    const text = tempDiv.innerText.trim(); // Extract text only (no HTML tags for typing effect)
-    
+    tempDiv.innerHTML = this.htmlContent.trim(); // Preserve HTML structure
+
+    const childNodes = Array.from(tempDiv.childNodes); // Get all child nodes including HTML tags
+
     this.container.innerHTML = ''; // Clear initial text
 
     // Create and add the blinking cursor
@@ -34,14 +35,18 @@ export class TypewriterDirective implements OnInit {
     this.container.appendChild(this.cursor);
 
     let i = 0;
+    let currentNode: Node | null = null;
     const interval = setInterval(() => {
-      if (i < text.length) {
-        this.container.insertBefore(document.createTextNode(text.charAt(i)), this.cursor);
+      if (i < childNodes.length) {
+        currentNode = childNodes[i];
+        if (currentNode instanceof HTMLElement || currentNode instanceof Text) {
+          this.container.insertBefore(currentNode, this.cursor);
+        }
         i++;
       } else {
         clearInterval(interval);
         this.cursor.remove(); // Remove cursor after typing ends
       }
-    }, );
+    }, this.speed);
   }
 }
