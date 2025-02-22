@@ -12,8 +12,13 @@
             <app-circular-menu [isVisible]="isVisible" (onCloseMenu)="closeCircularMenu()" ></app-circular-menu>
 
         </div>
-    }@else {
-        <div class="fixed top-0 left-0 w-full px-10 py-2 flex flex-row-reverse bg-body  z-50">
+    }@else if (isPortfolio) {
+        <router-outlet></router-outlet>
+
+    }
+    
+    @else {
+        <div class="fixed top-0 left-0 w-full px-10 py-2 flex flex-row-reverse bg-body">
             <div class="main-header-layout flex flex-row gap-2 h-fit">
                
                 <app-setting></app-setting>

@@ -12,6 +12,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'public-forum';
   isHome: boolean = false;
   isAuth: boolean = false;
+  isPortfolio: boolean = false;
   isVisible: boolean = false;
   currentRoute: string = '';
   private routerSubscription: Subscription | null = null;
@@ -37,6 +38,13 @@ export class AppComponent implements OnInit, OnDestroy {
       this.isAuth = true;
     }else{
       this.isAuth = false;
+    }
+    if(this.currentRoute === '/'){
+      this.isPortfolio = true
+
+    }else{
+      this.isPortfolio = false
+
     }
    
   }

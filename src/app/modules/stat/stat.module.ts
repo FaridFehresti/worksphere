@@ -13,6 +13,7 @@ import { StatConditionComponent } from './components/stat-condition/stat-conditi
 import { StatCalendarComponent } from './components/stat-calendar/stat-calendar.component';
 import { StatStackComponent } from './components/stat-stack/stat-stack.component';
 import { HolographicRingComponent } from 'src/app/shared/components/3d-model-ring/three-d-ring/three-d-ring.component';
+import { HexSphereComponent } from 'src/app/shared/components/model-geometry-sphere/hex-sphere.component';
 
 const COMPONENTS = [
     ThreeDModelComponent,
@@ -35,7 +36,8 @@ const MAT = [
     CommonModule,
     StatRoutingModule,
     ClockComponent,
-    HolographicRingComponent
+    HolographicRingComponent,
+    HexSphereComponent
   ],
 })
 export class StatModule {}

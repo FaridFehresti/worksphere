@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 export const routes: Routes = [
   // Redirect empty path to 'home'
-  { path: "", redirectTo: 'home', pathMatch: 'full' },
+  { path: "",
+    loadChildren: () => import('./modules/portoflio/portfolio.module').then(m => m.PortfolioModule),
+
+   },
 
   // Your component route (corrected import)
   {
