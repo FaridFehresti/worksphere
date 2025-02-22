@@ -58,7 +58,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
     setTimeout(()=>{
       this.expandRing = false;
-    },3500)
+    },4500)
   }
   @HostListener('mousemove', ['$event'])
   

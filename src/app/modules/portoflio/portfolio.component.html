@@ -2,7 +2,7 @@
   <div
     class="overflow-hidden main-info-container w-1/2 px-14 flex flex-col justify-center items-center"
   >
-  <span class="backdrop overflow-hidden"></span>
+    <span class="backdrop overflow-hidden"></span>
     <app-holographic-ring [expandRing]="expandRing"></app-holographic-ring>
 
     <div class="my-info-container w-full">
@@ -17,7 +17,9 @@
         <span class="link-line"></span>
         About
       </a>
-      <span (click)="onExprienceClick()" class="menu-item cursor-pointer" > Expriences </span>
+      <span (click)="onExprienceClick()" class="menu-item cursor-pointer">
+        Expriences
+      </span>
       <a
         class="menu-item"
         href="
@@ -31,12 +33,19 @@
   <div class="scroller-container w-1/2 px-12 py-8 overflow-y-auto">
     <div class="about">
       <div class="about-text-container py-4">
-        <p [appTypewriter]="paragraphHtml" [speed]="75" [cursorSpeed]="500" class=" text-white font-mono"></p>
-
-
+        <p
+          [appTypewriter]="paragraphHtml"
+          [speed]="75"
+          [cursorSpeed]="500"
+          class="text-white "
+        ></p>
       </div>
       <div class="about-header-container flex flex-col gap-6">
-        <div [@zoomInRight]="animationState" class="header-card-item p-2 w-1/2 " [ngClass]="displayComponent ? '':'display-none'">
+        <div
+          [@zoomInRight]="animationState"
+          class="header-card-item p-2 w-1/2"
+          [ngClass]="displayComponent ? '' : 'display-none'"
+        >
           <div class="card-header flex gap-4 items-center">
             <img class="icon-image mb-4" [src]="reactImage" alt="" />
             <div class="card-header-text-container flex flex-col text-white">
@@ -60,11 +69,10 @@
         </div>
         <div [@zoomInRight]="animationState" class="header-card-item p-2">
           <div class="card-header flex gap-4 items-center">
-            <img class="icon-image mb-4"  [src]="serverImage" alt="" />
+            <img class="icon-image mb-4" [src]="serverImage" alt="" />
 
             <div class="card-header-text-container flex flex-col text-white">
-              <span class="text-2xl font-bold ">Backend Dev
-              </span>
+              <span class="text-2xl font-bold">Backend Dev </span>
               <span class="text-2xl font-bold">NodeJs,NestJs</span>
             </div>
           </div>

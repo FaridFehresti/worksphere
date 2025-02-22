@@ -56,7 +56,7 @@ export class HolographicRingComponent implements OnInit, OnDestroy {
     this.el.nativeElement.appendChild(this.renderer.domElement);
   
     // Add ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft ambient light for visibility
+    const ambientLight = new THREE.AmbientLight(0xffffff, 15); // Soft ambient light for visibility
     this.scene.add(ambientLight);
   
     // Add scene lighting
@@ -107,7 +107,7 @@ export class HolographicRingComponent implements OnInit, OnDestroy {
   private animate(): void {
     requestAnimationFrame(() => this.animate());
     const elapsed = this.clock.getElapsedTime();
-
+  
     // Adjust the target values based on expandRing input
     if (this.expandRing) {
       this.targetRadius = 5;
@@ -116,79 +116,87 @@ export class HolographicRingComponent implements OnInit, OnDestroy {
       if (Math.random() < 0.01) {
         this.randomSpinAxis.set(Math.random(), Math.random(), Math.random()).normalize();
       }
-      
+  
       if (!this.sphere) {
         this.createSphere(); // Create sphere when expanding
       }
     } else {
       this.targetRadius = 3;
       this.targetSpinSpeed = 0.1;
-      if (this.sphere) {
-        this.sphere.scale.set(1, 1, 1); // Shrink sphere back to original size
-      }
     }
-
+  
     // Smoothly interpolate the radius and spin speed
     const easeFactor = this.expandRing ? 0.05 : 0.02;
     this.currentRadius += (this.targetRadius - this.currentRadius) * easeFactor;
     this.spinSpeed += (this.targetSpinSpeed - this.spinSpeed) * easeFactor;
-
+  
+    // Smoothly adjust the sphere scale
+    if (this.sphere) {
+      const targetScale = this.expandRing ? 1.7 : 0.5; // Full scale when expanded, invisible when not
+      this.sphere.scale.set(
+        this.sphere.scale.x + (targetScale - this.sphere.scale.x) * easeFactor,
+        this.sphere.scale.y + (targetScale - this.sphere.scale.y) * easeFactor,
+        this.sphere.scale.z + (targetScale - this.sphere.scale.z) * easeFactor
+      );
+    }
+  
     // Update the ring's animation
     this.lines.forEach((line, i) => {
       const geometry = line.geometry as THREE.BufferGeometry;
       const points = geometry.attributes['position'].array as Float32Array;
-
+  
       // Add a white light effect moving along the line
       for (let j = 0; j <= 100; j++) {
         const angle = (j / 100) * Math.PI * 2;
         const angleOffset = (i / this.lines.length) * Math.PI * 2;
         const waveOffset = Math.sin(elapsed * 2 + angleOffset) * 0.02;
-
+  
         const x = (this.currentRadius + waveOffset + 0.5 * Math.sin(angle * 2)) * Math.cos(angle + angleOffset);
         const y = (this.currentRadius + waveOffset + 0.5 * Math.sin(angle * 2)) * Math.sin(angle + angleOffset);
         const z = 0.5 * Math.cos(angle * 3);
-
+  
         points[j * 3] = x;
         points[j * 3 + 1] = y;
         points[j * 3 + 2] = z;
-
+  
         // Moving white light effect
         const lightPosition = (elapsed * 5 + j / 5) % 100;
         const intensity = Math.exp(-Math.pow(j - lightPosition, 2) / 50); // Smooth glowing effect
         const colorValue = Math.min(1, intensity); // Ensure it doesn’t exceed white
-
+  
         (geometry.attributes['color'].array as Float32Array)[j * 3] = colorValue;
         (geometry.attributes['color'].array as Float32Array)[j * 3 + 1] = colorValue;
         (geometry.attributes['color'].array as Float32Array)[j * 3 + 2] = colorValue;
       }
-
+  
       geometry.attributes['position'].needsUpdate = true;
       geometry.attributes['color'].needsUpdate = true;
       line.rotation.z = elapsed * this.spinSpeed;
       line.rotation.x = Math.sin(elapsed * 0.2 + i * 0.1) * 0.3;
     });
-
+  
     // Update light position for continuous effect
     this.pointLight.position.x = Math.sin(elapsed * 0.1) * 5;
     this.pointLight.position.y = Math.cos(elapsed * 0.1) * 5;
-
+  
     // Rotate the whole model (scene) randomly
     this.scene.rotation.x += this.randomSpinSpeed * this.randomSpinAxis.x;
     this.scene.rotation.y += this.randomSpinSpeed * this.randomSpinAxis.y;
     this.scene.rotation.z += this.randomSpinSpeed * this.randomSpinAxis.z;
-
+  
     // Reset camera position after expansion
     if (!this.expandRing) {
       this.camera.position.lerp(this.originalPosition, 0.005); // Smoothly return to original position
     }
-
+  
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
   }
+  
 
   private createSphere(): void {
     const radius = 1;
-    const segments = 30;
+    const segments = 10;
     const geometry = new THREE.SphereGeometry(radius, segments, segments);
     const material = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.8 });
 
