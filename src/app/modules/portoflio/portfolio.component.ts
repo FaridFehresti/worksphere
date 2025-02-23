@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
+import { Component, OnDestroy, OnInit, HostListener, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { zoomInRightAnimation } from 'src/app/shared/@animations/zooming-entrances';
@@ -16,6 +16,35 @@ interface IExprienceObj {
 })
 export class PortfolioComponent implements OnInit, OnDestroy {
   routeSub: Subscription | null = null;
+   listOfFrontendStacks: Array<{ name: string, logo: string }> = [
+    { name: 'Angular', logo: 'angular-logo-url' },
+    { name: 'Next.js', logo: 'nextjs-logo-url' },
+    { name: 'React', logo: 'react-logo-url' },
+    { name: 'Bootstrap', logo: 'bootstrap-logo-url' },
+    { name: 'MUI (Material-UI)', logo: 'mui-logo-url' },
+    { name: 'RxJS', logo: 'rxjs-logo-url' },
+    { name: 'Axios', logo: 'axios-logo-url' },
+    { name: 'HTML', logo: 'html-logo-url' },
+    { name: 'CSS', logo: 'css-logo-url' },
+    { name: 'SCSS/Less', logo: 'scss-less-logo-url' },
+    { name: 'Tailwind CSS', logo: 'tailwind-css-logo-url' },
+    { name: 'Ant Design', logo: 'ant-design-logo-url' },
+    { name: 'NgRx', logo: 'ngrx-logo-url' },
+    { name: 'Git & GitHub', logo: 'git-github-logo-url' },
+    { name: 'Angular Material', logo: 'angular-material-logo-url' },
+    { name: 'Three.js', logo: 'threejs-logo-url' }
+  ];
+  
+   listOfBackendStacks: Array<{ name: string, logo: string }> = [
+    { name: 'Node.js', logo: 'nodejs-logo-url' },
+    { name: 'NestJS', logo: 'nestjs-logo-url' },
+    { name: 'Express.js', logo: 'expressjs-logo-url' },
+    { name: 'Redux', logo: 'redux-logo-url' },
+    { name: 'npm & Package Management', logo: 'npm-logo-url' },
+    { name: 'Cloud Hosting', logo: 'cloud-hosting-logo-url' },
+    { name: 'VPN Setup', logo: 'vpn-setup-logo-url' }
+  ];
+  
   listOfExpriences: Array<IExprienceObj> = [
     {
       title: ' Admin Panel & Automation Programmer',
@@ -83,19 +112,91 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   reactImage: string = '/images/react-white.png';
   serverImage: string = '/images/server-white.png';
   expandRing: boolean = false;
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private cdRef: ChangeDetectorRef) {}
+  activeSection: string = 'about'; // Default active section
 
+  @ViewChild('scrollerContainer', { static: true }) scrollerContainer!: ElementRef;
+
+ngAfterViewInit() {
+  this.scrollerContainer.nativeElement.addEventListener('scroll', () => {
+    this.detectActiveSection();
+  });
+  this.detectActiveSection(); // Detect section on load
+}
+
+detectActiveSection(): void {
+  const sections = ['about', 'expriences', 'stack', 'projects'];
+  
+  for (const section of sections) {
+    const el = document.querySelector(`.${section}`) as HTMLElement;
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      const containerRect = this.scrollerContainer.nativeElement.getBoundingClientRect();
+
+      if (rect.top >= containerRect.top && rect.top < containerRect.bottom) {
+        if (this.activeSection !== section) {
+          this.expandRing = true;
+
+          if (this.expandTimeout) {
+            clearTimeout(this.expandTimeout);
+          }
+        
+          this.expandTimeout = setTimeout(() => {
+            this.expandRing = false;
+          }, 4500);
+          this.activeSection = section;
+          this.cdRef.detectChanges(); // Update view manually
+          
+        }
+        break;
+      }
+    }
+  }
+}
+
+  private expandTimeout: any; // Store timeout reference
+
+scrollToSection(section: string): void {
+  this.expandRing = true;
+
+  // Clear the previous timeout before setting a new one
+  if (this.expandTimeout) {
+    clearTimeout(this.expandTimeout);
+  }
+
+  this.expandTimeout = setTimeout(() => {
+    this.expandRing = false;
+  }, 4500);
+
+  const element = document.querySelector(`.${section}`);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    this.activeSection = section;
+  }
+}
+onScroll(): void {
+  const sections = ['about', 'expriences', 'stack', 'projects'];
+
+  for (const section of sections) {
+    const el = document.querySelector(`.${section}`) as HTMLElement;
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+        this.activeSection = section;
+        break;
+      }
+    }
+  }
+}
+  // Detect the currently visible section while scrolling
+  @HostListener('window:scroll', [])
+  
   ngOnInit(): void {
     this.getCurrentParams();
     this.onExprienceClick();
-    setTimeout(() => {
-      this.animate();
-    }, 10);
+  
   }
-  animate() {
-    this.displayComponent = true;
-    this.animationState = !this.animationState;
-  }
+  
   getCurrentParams(): void {
     this.routeSub = this.route.queryParams.subscribe((params) => {
       this.routingParam = params['type'];

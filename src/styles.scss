@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @import './app/shared/styles/font-icons.scss';
+@import './app/shared/styles/brand-icons.scss';
+
 @import url('./../node_modules/ngx-spinner/animations/ball-pulse-sync.css');
 @import url('./../node_modules/ngx-spinner/animations/square-jelly-box.css');
 

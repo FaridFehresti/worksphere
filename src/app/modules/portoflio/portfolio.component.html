@@ -13,24 +13,37 @@
       </p>
     </div>
     <div class="menu-container w-full flex flex-col gap-2">
-      <a class="menu-item-selected w-full">
+      <a class="menu-item" 
+         [class.menu-item-selected]="activeSection === 'about'"
+         (click)="scrollToSection('about')">
         <span class="link-line"></span>
         About
       </a>
-      <span (click)="onExprienceClick()" class="menu-item cursor-pointer">
+      <a class="menu-item"
+         [class.menu-item-selected]="activeSection === 'expriences'"
+         (click)="scrollToSection('expriences')">
         Expriences
-      </span>
-      <a
-        class="menu-item"
-        href="
-        "
-      >
-        Stack</a
-      >
-      <a class="menu-item" href=""> Projects </a>
+      </a>
+      <a class="menu-item"
+         [class.menu-item-selected]="activeSection === 'stack'"
+         (click)="scrollToSection('stack')">
+        Stack
+      </a>
+      <a class="menu-item"
+         [class.menu-item-selected]="activeSection === 'projects'"
+         (click)="scrollToSection('projects')">
+        Projects
+      </a>
+    </div>
+    
+    <div class="links-container w-full flex gap-4 text-3xl mt-8">
+      <a class="link-item" href="https://github.com/FaridFehresti" target="_blank" ><span class="icon-github"></span></a>
+      <a class="link-item" href=""><span class="icon-linkedin"></span></a>
+      <a class="link-item" href=""><span class="icon-instagram"></span></a>
+
     </div>
   </div>
-  <div class="scroller-container w-1/2 px-12 py-8 overflow-y-auto">
+  <div #scrollerContainer class="scroller-container w-1/2 px-12 py-8 overflow-y-auto">
     <div class="about">
       <div class="about-text-container py-4 flex flex-col gap-4">
         <p
@@ -122,7 +135,25 @@
       }
 
     </div>
-    <div class="stack">stack</div>
+    <div class="stack w-full p-2 flex gap-4 text-white  h-screen items-center justify-center">
+      <div class="frontend w-full flex flex-col  gap-2 h-96 ">
+        <h4>Frontend Dev</h4>
+        <div class="stack-items-container flex gap-2 flex-wrap">
+
+        @for(item of listOfFrontendStacks; track $index){
+          <span class="stack-item">{{item.name}}</span>
+        }</div>
+    </div>
+    <div class="backend w-full flex flex-col  gap-2 h-96 ">
+        <h4>Backend Dev</h4>
+        <div class="stack-items-container flex gap-2 flex-wrap">
+          @for(item of listOfBackendStacks; track $index){
+            <span class="stack-item">{{item.name}}</span>
+          }
+        </div>
+        
+    </div>
+    </div>
     <div class="projects">projects</div>
   </div>
   <div class="light" [ngStyle]="lightStyle"></div>
