@@ -1,9 +1,12 @@
-<div class="main-portfolio-container text-black w-full h-screen flex">
-  <div
-    class="overflow-hidden main-info-container w-1/2 px-14 flex flex-col justify-center items-center"
+<div class="main-portfolio-container text-black w-full h-screen flex ">
+  @if(!isMobile){
+    <div
+    class="overflow-hidden main-info-container w-1/2 px-14 flex flex-col justify-center items-center relative"
   >
     <span class="backdrop overflow-hidden"></span>
     <app-holographic-ring [expandRing]="expandRing"></app-holographic-ring>
+  
+    
 
     <div class="my-info-container w-full">
       <h1 class="my-name">Farid Fehresti</h1>
@@ -43,8 +46,55 @@
 
     </div>
   </div>
-  <div #scrollerContainer class="scroller-container w-1/2 px-12 py-8 overflow-y-auto">
-    <div class="about">
+  }
+  <div #scrollerContainer [class]="!isMobile  ? 'scroller-container w-1/2  overflow-y-auto' : 'scroller-container w-full overflow-y-auto'">
+    @if(isMobile){
+      <div
+    class="overflow-hidden main-info-container !h-screen w-full px-12 pb-8 flex flex-col justify-center items-center"
+  >
+    <span class="backdrop overflow-hidden"></span>
+    <app-holographic-ring [expandRing]="expandRing"></app-holographic-ring>
+
+    <div class="my-info-container w-full">
+      <h1 class="my-name !text-5xl">Farid Fehresti</h1>
+      <h2 class="my-title !text-2xl">Full Stack Web Developer</h2>
+      <p class="max-w-xs">
+        I build accessible, pixel-perfect digital experiences for the web
+      </p>
+    </div>
+    <div class="menu-container w-full flex flex-col gap-2">
+      <a class="menu-item" 
+         [class.menu-item-selected]="activeSection === 'about'"
+         (click)="scrollToSection('about')">
+        <span class="link-line"></span>
+        About
+      </a>
+      <a class="menu-item"
+         [class.menu-item-selected]="activeSection === 'expriences'"
+         (click)="scrollToSection('expriences')">
+        Expriences
+      </a>
+      <a class="menu-item"
+         [class.menu-item-selected]="activeSection === 'stack'"
+         (click)="scrollToSection('stack')">
+        Stack
+      </a>
+      <a class="menu-item"
+         [class.menu-item-selected]="activeSection === 'projects'"
+         (click)="scrollToSection('projects')">
+        Projects
+      </a>
+    </div>
+    
+    <div class="links-container w-full flex gap-4 text-3xl mt-8">
+      <a class="link-item" href="https://github.com/FaridFehresti" target="_blank" ><span class="icon-github"></span></a>
+      <a class="link-item" href=""><span class="icon-linkedin"></span></a>
+      <a class="link-item" href=""><span class="icon-instagram"></span></a>
+
+    </div>
+  </div>
+    }
+    <div class="about  px-12 py-8">
       <div class="about-text-container py-4 flex flex-col gap-4">
         <p
           [appTypewriter]="paragraphHtml1"
@@ -69,7 +119,7 @@
       </div>
       <div class="about-header-container flex flex-col gap-6">
         <!-- Frontend Developer Section -->
-        <div class="header-card-item p-2 w-1/2">
+        <div class="header-card-item p-2  w-1/2">
           <div class="card-header flex gap-4 items-center">
             <img class="icon-image mb-4" [src]="reactImage" alt="" />
             <div class="card-header-text-container flex flex-col text-white">
@@ -91,7 +141,6 @@
           </div>
         </div>
       
-        <!-- Backend Developer Section -->
         <div class="header-card-item p-2">
           <div class="card-header flex gap-4 items-center">
             <img class="icon-image mb-4" [src]="serverImage" alt="" />
@@ -101,7 +150,7 @@
             </div>
           </div>
           <div class="card-header-content relative">
-            <div class="tags-container flex flex-col justify-center w-fit items-center">
+            <div class="tags-container flex flex-col justify-center w-fit items-center gap-4">
               <span class="font-bold text-white">{{ "&lt;h3&gt;" }}</span>
               <span class="tag-line"></span>
               <span class="font-bold text-white">{{ "&lt;/h3&gt;" }}</span>
@@ -116,7 +165,7 @@
       </div>
       
     </div>
-    <div class="expriences">
+    <div class="expriences px-12 py-8">
       @for(exprience of listOfExpriences ; track $index){
         <div class="exprience-card">
           <div class="date-container">
@@ -125,7 +174,7 @@
           <div class="content">
             <span class="title">{{exprience.title}}</span>
             <span class="description">{{exprience.description}}</span>
-           <div class="skills-container">
+           <div class="skills-container flex-wrap">
             @for (skill of exprience.skils; track $index) {
               <span class="skill-item">{{skill}}</span>
             }
@@ -135,9 +184,9 @@
       }
 
     </div>
-    <div class="stack w-full p-2 flex gap-4 text-white  h-screen items-center justify-center">
+    <div class="stack w-full px-12 py-8 flex gap-4 text-white  h-screen items-center justify-center">
       <div class="frontend w-full flex flex-col  gap-2 h-96 ">
-        <h4>Frontend Dev</h4>
+        <h5>Frontend Dev</h5>
         <div class="stack-items-container flex gap-2 flex-wrap">
 
         @for(item of listOfFrontendStacks; track $index){
@@ -154,7 +203,7 @@
         
     </div>
     </div>
-    <div class="projects">projects</div>
+    <div class="projects  px-12 py-8">projects</div>
   </div>
   <div class="light" [ngStyle]="lightStyle"></div>
 </div>

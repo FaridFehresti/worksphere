@@ -113,10 +113,15 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   serverImage: string = '/images/server-white.png';
   expandRing: boolean = false;
   constructor(private route: ActivatedRoute, private cdRef: ChangeDetectorRef) {}
-  activeSection: string = 'about'; // Default active section
+  activeSection: string = ''; // Default active section
 
   @ViewChild('scrollerContainer', { static: true }) scrollerContainer!: ElementRef;
+  isMobile: boolean = window.innerWidth < 982; // Initial check
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.isMobile = window.innerWidth < 982;
+  }
 ngAfterViewInit() {
   this.scrollerContainer.nativeElement.addEventListener('scroll', () => {
     this.detectActiveSection();
