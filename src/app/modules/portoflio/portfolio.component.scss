@@ -155,6 +155,9 @@
   justify-content: space-between;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  @media(max-width: 982px){
+    padding: 8px;
+  }
 }
 .exprience-card:hover{
   border-radius: 8px;
@@ -163,6 +166,9 @@
 .date{
   font-size: 12px;
   text-wrap: nowrap;
+@media(max-width: 982px){
+    font-size: 10px;
+  }
 }
 .date-container{
   width: 85px;
@@ -171,6 +177,9 @@
 .title{
   font-weight: bold;
   font-size: 24px;
+  @media(max-width: 982px){
+    font-size: 16px;
+  }
 }
 .content{
   display: flex;
@@ -187,42 +196,174 @@
 .skill-item{
   border-radius: 9999px;
   padding: 4px 12px;
-  background-color: #FF204E;
+  background-color: #7A1CAC;
   color: var(--white);
   font-size: 12px;
   font-weight: 600;
+  transition: all 0.5s ease;
+}
+.skill-item:hover{
+  background-color: var(--white);
+  color: var(--black);
 }
 .description{
   color: var(--primary);
 }
 .frontend{
-  padding: 8px;
+  padding: 16px;
   border-radius: 8px;
   transition: all 0.5s ease;
+  height: 100%;
 }
 .frontend:hover{
   background-color: rgba(163, 29, 29, 0.3);
-  scale: 1.05;
+
 
 }
 .backend{
-  padding: 8px;
+  padding: 16px;
   border-radius: 8px;
   transition: all 0.5s ease;
 }
 .backend:hover{
   background-color: rgba(163, 29, 29, 0.3);
-  scale: 1.05;
 
+}.stack-item {
+  position: relative;
+  height: 40px;  /* Box height */
+  perspective: 800px; /* Depth effect */
+  cursor: pointer;
 }
-.stack-item{
-  border-radius: 9999px;
-  padding: 4px 12px;
-  background-color: #FF204E;
-  color: var(--white);
-  font-size: 12px;
+
+.stack-item-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease-in-out;
+}
+
+.stack-item-front,
+.stack-item-back,
+.stack-item-top,
+.stack-item-bottom {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
   font-weight: 600;
+  backface-visibility: hidden;
+  @media(max-width: 982px){
+    font-size: 10px;
+  }
 }
+
+/* Front Side */
+.stack-item-front {
+  background-color: #2E073F;
+  color: white;
+  transform: translateZ(10px);
+}
+
+/* Back Side */
+.stack-item-back {
+  background-color: var(--white);
+  color: var(--black);
+  transform: rotateX(180deg) translateZ(10px);
+}
+
+/* Top Side */
+.stack-item-top {
+  background-color: var(--white);
+  color: var(--black);
+  height: 20px; /* Half height to give thickness */
+  transform: rotateX(90deg) translateY(-10px);
+}
+
+/* Bottom Side */
+.stack-item-bottom {
+  background-color: var(--white);
+  color: var(--black);
+  height: 20px;
+  transform: rotateX(-90deg) translateY(10px);
+}
+
+/* Hover Effect */
+.stack-item:hover .stack-item-inner {
+  transform: rotateX(180deg);
+}.mat-grid-tile {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* Smooth Overlay */
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  border-radius: 8px;
+  opacity: 1;
+  transform: scale(1); /* Ensure default state */
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+/* Title */
+.project-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+/* Description */
+.project-description {
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+/* Image Styling */
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease-in-out;
+}
+
+/* Hover Effects */
+.mat-grid-tile:hover .project-overlay {
+  opacity: 0; /* Smooth fade out */
+  transform: scale(1.1); /* Floating effect */
+}
+
+.mat-grid-tile:not(:hover) .project-overlay {
+  opacity: 1; /* Smooth fade in */
+  transform: scale(1); /* Ensure it returns smoothly */
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out; /* Keep transition */
+}
+
+.mat-grid-tile:hover .project-image {
+  transform: scale(1.1) translateY(-5px); /* Zoom and float */
+}
+
+
+
+
+
+
 html {
   scroll-behavior: smooth;
 }

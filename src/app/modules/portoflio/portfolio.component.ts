@@ -20,29 +20,32 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     { name: 'Angular', logo: 'angular-logo-url' },
     { name: 'Next.js', logo: 'nextjs-logo-url' },
     { name: 'React', logo: 'react-logo-url' },
-    { name: 'Bootstrap', logo: 'bootstrap-logo-url' },
-    { name: 'MUI (Material-UI)', logo: 'mui-logo-url' },
-    { name: 'RxJS', logo: 'rxjs-logo-url' },
-    { name: 'Axios', logo: 'axios-logo-url' },
+    { name: 'Redux', logo: 'redux-logo-url' },
+    { name: 'Three.js', logo: 'threejs-logo-url' },
+    { name: 'Tailwind CSS', logo: 'tailwind-css-logo-url' },
     { name: 'HTML', logo: 'html-logo-url' },
     { name: 'CSS', logo: 'css-logo-url' },
     { name: 'SCSS/Less', logo: 'scss-less-logo-url' },
-    { name: 'Tailwind CSS', logo: 'tailwind-css-logo-url' },
-    { name: 'Ant Design', logo: 'ant-design-logo-url' },
+    { name: 'Bootstrap', logo: 'bootstrap-logo-url' },
+    { name: 'RxJS', logo: 'rxjs-logo-url' },
     { name: 'NgRx', logo: 'ngrx-logo-url' },
-    { name: 'Git & GitHub', logo: 'git-github-logo-url' },
+    { name: 'Axios', logo: 'axios-logo-url' },
+    { name: 'MUI (Material-UI)', logo: 'mui-logo-url' },
     { name: 'Angular Material', logo: 'angular-material-logo-url' },
-    { name: 'Three.js', logo: 'threejs-logo-url' }
+    { name: 'Ant Design', logo: 'ant-design-logo-url' },
+    { name: 'Git & GitHub', logo: 'git-github-logo-url' },
+
+
   ];
   
    listOfBackendStacks: Array<{ name: string, logo: string }> = [
     { name: 'Node.js', logo: 'nodejs-logo-url' },
     { name: 'NestJS', logo: 'nestjs-logo-url' },
     { name: 'Express.js', logo: 'expressjs-logo-url' },
-    { name: 'Redux', logo: 'redux-logo-url' },
-    { name: 'npm & Package Management', logo: 'npm-logo-url' },
+    { name: 'EJs', logo: 'EJs-logo-url' },
     { name: 'Cloud Hosting', logo: 'cloud-hosting-logo-url' },
-    { name: 'VPN Setup', logo: 'vpn-setup-logo-url' }
+    { name: 'Postgres', logo: 'postgres-logo-url' },
+    { name: 'MySQL', logo: 'mysql-logo-url' },
   ];
   
   listOfExpriences: Array<IExprienceObj> = [
@@ -113,7 +116,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   serverImage: string = '/images/server-white.png';
   expandRing: boolean = false;
   constructor(private route: ActivatedRoute, private cdRef: ChangeDetectorRef) {}
-  activeSection: string = ''; // Default active section
+  activeSection: string = 'about'; // Default active section
 
   @ViewChild('scrollerContainer', { static: true }) scrollerContainer!: ElementRef;
   isMobile: boolean = window.innerWidth < 982; // Initial check
@@ -128,6 +131,7 @@ ngAfterViewInit() {
   });
   this.detectActiveSection(); // Detect section on load
 }
+
 
 detectActiveSection(): void {
   const sections = ['about', 'expriences', 'stack', 'projects'];

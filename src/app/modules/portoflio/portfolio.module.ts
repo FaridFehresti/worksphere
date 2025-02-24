@@ -10,6 +10,8 @@ import { HolographicBackgroundComponent } from 'src/app/shared/components/three-
 import { TypewriterDirective } from 'src/app/shared/@animations/typewritting/typewriter.directive';
 import { HolographicRingComponent } from 'src/app/shared/components/3d-model-ring/three-d-ring/three-d-ring.component';
 import { StackModelComponent } from 'src/app/shared/components/stack-model/stack-model.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 const COMPONENTS = [
   PortfolioHeroComponent,
   PortfolioComponent,
@@ -18,7 +20,8 @@ const COMPONENTS = [
 ]
 const MAT = [
 MatIconModule,
-MatButtonModule
+MatButtonModule,
+MatGridListModule
 ]
 @NgModule({
   declarations: [...COMPONENTS],

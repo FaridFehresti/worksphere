@@ -58,9 +58,10 @@
     <div class="my-info-container w-full">
       <h1 class="my-name !text-5xl">Farid Fehresti</h1>
       <h2 class="my-title !text-2xl">Full Stack Web Developer</h2>
-      <p class="max-w-xs">
-        I build accessible, pixel-perfect digital experiences for the web
+      <p [class]="isMobile ? 'max-w-xs font-bold': 'max-w-xs'" >
+        I build accessible, pixel-perfect digital experiences for the web.
       </p>
+      
     </div>
     <div class="menu-container w-full flex flex-col gap-2">
       <a class="menu-item" 
@@ -94,7 +95,7 @@
     </div>
   </div>
     }
-    <div class="about  px-12 py-8">
+    <div [class]="isMobile ? 'about px-4 py-2': 'about  px-12 py-8' ">
       <div class="about-text-container py-4 flex flex-col gap-4">
         <p
           [appTypewriter]="paragraphHtml1"
@@ -136,14 +137,14 @@
             <p appTypewriter="Experienced in building interactive, responsive user interfaces using React, Next.js, and Angular, focused on seamless user experience."
                [speed]="50"
                [cursorSpeed]="200"
-               class="text-content absolute text-inherit text-white">
+               class="text-content absolute text-inherit text-white text-sm">
             </p>
           </div>
         </div>
       
         <div class="header-card-item p-2">
           <div class="card-header flex gap-4 items-center">
-            <img class="icon-image mb-4" [src]="serverImage" alt="" />
+            <img class="icon-image mb-4" src="/images/nodejs.png" alt="" />
             <div class="card-header-text-container flex flex-col text-white">
               <span class="text-2xl font-bold">Backend Dev</span>
               <span class="text-2xl font-bold">NodeJs, NestJs</span>
@@ -165,7 +166,7 @@
       </div>
       
     </div>
-    <div class="expriences px-12 py-8">
+    <div [class]="isMobile ? 'expriences px-4 py-2 ':'expriences px-12 py-8'">
       @for(exprience of listOfExpriences ; track $index){
         <div class="exprience-card">
           <div class="date-container">
@@ -184,26 +185,77 @@
       }
 
     </div>
-    <div class="stack w-full px-12 py-8 flex gap-4 text-white  h-screen items-center justify-center">
-      <div class="frontend w-full flex flex-col  gap-2 h-96 ">
-        <h5>Frontend Dev</h5>
-        <div class="stack-items-container flex gap-2 flex-wrap">
-
-        @for(item of listOfFrontendStacks; track $index){
-          <span class="stack-item">{{item.name}}</span>
-        }</div>
+    <div [class]="isMobile ? 'stack w-full px-4 py-2 flex gap-4 text-white  h-fit items-start justify-center' : 'stack w-full px-12 py-8 flex gap-4 text-white  h-fit items-start justify-center' ">
+      <div class="frontend w-full flex flex-col  gap-2 ">
+        <span [class]="isMobile ? '!text-md mb-2 text-nowrap' : 'text-2xl mb-2'">Frontend Dev</span>
+        <div class="stack-items-container flex flex-col gap-2">
+          @for(item of listOfFrontendStacks; track $index){
+            <div class="stack-item">
+              <div class="stack-item-inner">
+                <div class="stack-item-front">{{ item.name }}</div>
+                <div class="stack-item-back">{{ item.name }}</div>
+                <div class="stack-item-top"></div>
+                <div class="stack-item-bottom"></div>
+              </div>
+            </div>
+          }
+        </div>
+        
     </div>
-    <div class="backend w-full flex flex-col  gap-2 h-96 ">
-        <h4>Backend Dev</h4>
-        <div class="stack-items-container flex gap-2 flex-wrap">
+    <div class="backend w-full flex flex-col  gap-2">
+      <span [class]="isMobile ? '!text-md mb-2 text-nowrap' : 'text-2xl mb-2'">Backend Dev</span>
+      <div class="stack-items-container flex flex-col gap-2 w-full">
           @for(item of listOfBackendStacks; track $index){
-            <span class="stack-item">{{item.name}}</span>
+            <div class="stack-item w-full">
+              <div class="stack-item-inner w-full">
+                <div class="stack-item-front w-full">{{ item.name }}</div>
+                <div class="stack-item-back w-full">{{ item.name }}</div>
+                <div class="stack-item-top w-full"></div>
+                <div class="stack-item-bottom w-full"></div>
+              </div>
+            </div>
           }
         </div>
         
     </div>
     </div>
-    <div class="projects  px-12 py-8">projects</div>
+    <div [class]="isMobile ? 'projects  px-4 py-2' : 'projects  px-12 py-8'">
+      <mat-grid-list cols="2" gutterSize="16" rowHeight="2:1">
+        <mat-grid-tile [rowspan]="3">
+          <div class="project-overlay">
+            <div class="project-title">BestInform</div>
+            <div class="project-description">Vacation booking platform</div>
+          </div>
+          <img class="project-image" src="/images/bestinform.png" alt="">
+        </mat-grid-tile>
+        
+        <mat-grid-tile [rowspan]="2">
+          <div class="project-overlay">
+            <div class="project-title">MadTalk</div>
+            <div class="project-description">Online education during COVID</div>
+          </div>
+          <img class="project-image" src="/images/madtalk.png" alt="">
+        </mat-grid-tile>
+      
+        <mat-grid-tile [rowspan]="3">
+          <div class="project-overlay">
+            <div class="project-title">Fani</div>
+            <div class="project-description">Technical school courses</div>
+          </div>
+          <img class="project-image" src="/images/fani.png" alt="">
+        </mat-grid-tile>
+      
+        <mat-grid-tile [rowspan]="2">
+          <div class="project-overlay">
+            <div class="project-title">WorkSphere</div>
+            <div class="project-description">Job management system</div>
+          </div>
+          <img class="project-image" src="/images/worksphere.png" alt="">
+        </mat-grid-tile>
+      </mat-grid-list>
+      
+      
+    </div>
   </div>
   <div class="light" [ngStyle]="lightStyle"></div>
 </div>
