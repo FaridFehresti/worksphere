@@ -16,6 +16,9 @@ interface IExprienceObj {
 })
 export class PortfolioComponent implements OnInit, OnDestroy {
   routeSub: Subscription | null = null;
+  isThankYouVisible: boolean = false; 
+  private touchStartY: number = 0;
+
    listOfFrontendStacks: Array<{ name: string, logo: string }> = [
     { name: 'Angular', logo: 'angular-logo-url' },
     { name: 'Next.js', logo: 'nextjs-logo-url' },
@@ -97,7 +100,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     top: '0px',
   };
   paragraphHtml1: string = `
-    Senior <span class="!text-primary">JavaScript Developer</span> with <span class="!text-primary">3+ years</span> of professional experience 
+    Senior <span class="!text-primary">JavaScript Developer</span> with <span class="!text-primary">5+ years</span> of professional experience 
     in web application development, automation, and <span class="!text-primary">UI/UX</span> design. 
     
   `;
@@ -110,6 +113,8 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     speed and efficiency across multiple projects. Strong focus on performance optimization, modern design patterns, 
     and AI-enhanced development. Experienced in freelancing, startups, and enterprise projects, 
     consistently delivering cutting-edge, minimalistic, and user-friendly applications.`;
+    thankYouParagraphText:string  = '';
+    thankYouHeaderText:string = ''
   animationState: boolean = false;
   displayComponent: boolean = false;
   reactImage: string = '/images/react-white.png';
@@ -117,25 +122,38 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   expandRing: boolean = false;
   constructor(private route: ActivatedRoute, private cdRef: ChangeDetectorRef) {}
   activeSection: string = 'about'; // Default active section
-
+  private expandTimeout: any;
+  private mouseMoveTimeout: any;
+  private scrollTimeout: any;
   @ViewChild('scrollerContainer', { static: true }) scrollerContainer!: ElementRef;
+  @ViewChild('thankYouSection', { static: false }) thankYouSection!: ElementRef;
+
   isMobile: boolean = window.innerWidth < 982; // Initial check
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.isMobile = window.innerWidth < 982;
   }
-ngAfterViewInit() {
-  this.scrollerContainer.nativeElement.addEventListener('scroll', () => {
-    this.detectActiveSection();
-  });
-  this.detectActiveSection(); // Detect section on load
+  ngAfterViewInit() {
+    if (this.scrollerContainer) {
+      this.scrollerContainer.nativeElement.addEventListener('scroll', () => {
+        this.detectActiveSection();
+        this.detectScroll();
+      });
+      this.detectActiveSection(); 
+      this.detectScroll();
+    }
+  }
+downloadResume() {
+  const link = document.createElement('a');
+  link.href = 'resume/faridfehresti-resume.pdf';
+  link.download = 'faridfehresti-resume.pdf';
+  link.click();
 }
 
-
 detectActiveSection(): void {
-  const sections = ['about', 'expriences', 'stack', 'projects'];
-  
+  const sections = ['about', 'experiences', 'stack', 'projects'];
+
   for (const section of sections) {
     const el = document.querySelector(`.${section}`) as HTMLElement;
     if (el) {
@@ -146,16 +164,14 @@ detectActiveSection(): void {
         if (this.activeSection !== section) {
           this.expandRing = true;
 
-          if (this.expandTimeout) {
-            clearTimeout(this.expandTimeout);
-          }
-        
+          if (this.expandTimeout) clearTimeout(this.expandTimeout);
+
           this.expandTimeout = setTimeout(() => {
             this.expandRing = false;
           }, 4500);
+
           this.activeSection = section;
           this.cdRef.detectChanges(); // Update view manually
-          
         }
         break;
       }
@@ -163,15 +179,10 @@ detectActiveSection(): void {
   }
 }
 
-  private expandTimeout: any; // Store timeout reference
-
 scrollToSection(section: string): void {
   this.expandRing = true;
 
-  // Clear the previous timeout before setting a new one
-  if (this.expandTimeout) {
-    clearTimeout(this.expandTimeout);
-  }
+  if (this.expandTimeout) clearTimeout(this.expandTimeout);
 
   this.expandTimeout = setTimeout(() => {
     this.expandRing = false;
@@ -183,54 +194,121 @@ scrollToSection(section: string): void {
     this.activeSection = section;
   }
 }
-onScroll(): void {
-  const sections = ['about', 'expriences', 'stack', 'projects'];
 
-  for (const section of sections) {
-    const el = document.querySelector(`.${section}`) as HTMLElement;
-    if (el) {
-      const rect = el.getBoundingClientRect();
-      if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-        this.activeSection = section;
-        break;
-      }
+@HostListener('window:scroll', [])
+detectScroll(): void {
+  const projectsSection = document.querySelector('.projects') as HTMLElement;
+  const thankYou = this.thankYouSection?.nativeElement;
+
+  if (!projectsSection || !thankYou) return;
+
+  const rect = projectsSection.getBoundingClientRect();
+  const isBottomReached = rect.bottom <= window.innerHeight;
+  const isAboveViewport = rect.top > window.innerHeight; // Detects if scrolled back up
+
+  if (isBottomReached && !isAboveViewport) {
+    if (!this.isThankYouVisible) {
+      this.thankYouHeaderText='Thank You for Visiting!'
+      this.thankYouParagraphText ='I appreciate your time. Feel free to connect with me!'
+      this.isThankYouVisible = true;
+      thankYou.classList.add('opacity-100', 'translate-y-0');
+    }
+  } else {
+    if (this.isThankYouVisible) {
+      this.isThankYouVisible = false;
+      thankYou.classList.remove('opacity-100', 'translate-y-0');
     }
   }
 }
-  // Detect the currently visible section while scrolling
-  @HostListener('window:scroll', [])
-  
-  ngOnInit(): void {
-    this.getCurrentParams();
-    this.onExprienceClick();
-  
+
+
+
+onExprienceClick() {
+  this.expandRing = true;
+
+  setTimeout(() => {
+    this.expandRing = false;
+  }, 4500);
+}
+handleThankYouScroll(event: any) {
+  const projectsSection = document.querySelector('.projects');
+
+  if (event.deltaY === -100) {
+    setTimeout(() => {
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }
+    }, 0); 
   }
-  
-  getCurrentParams(): void {
-    this.routeSub = this.route.queryParams.subscribe((params) => {
-      this.routingParam = params['type'];
-    });
+}
+
+@HostListener('mousemove', ['$event'])
+onMouseMove(event: MouseEvent): void {
+  if (this.mouseMoveTimeout) {
+    cancelAnimationFrame(this.mouseMoveTimeout);
   }
-  onExprienceClick() {
-    this.expandRing = true;
+  this.mouseMoveTimeout = requestAnimationFrame(() => {
+    this.lightStyle = {
+      left: `${event.clientX}px`,
+      top: `${event.clientY}px`,
+    };
+  });
+}
+
+@HostListener('window:scroll', [])
+onScroll(): void {
+  if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
+
+  this.scrollTimeout = setTimeout(() => {
+    this.detectActiveSection();
+    this.detectScroll();
+  }, 100); // Adjust debounce delay as needed
+}
+
+ngOnInit(): void {
+  this.getCurrentParams();
+  this.onExprienceClick();
+}
+
+getCurrentParams(): void {
+  this.routeSub = this.route.queryParams.subscribe((params) => {
+    this.routingParam = params['type'];
+  });
+}
+handleTouchStart(event: TouchEvent) {
+  // Store the touch start Y position
+  this.touchStartY = event.touches[0].clientY;
+}
+
+// Handles touchend event for mobile
+handleTouchEnd(event: TouchEvent) {
+  const touchEndY = event.changedTouches[0].clientY;
+  const projectsSection = document.querySelector('.projects');
+  const thankYou = this.thankYouSection?.nativeElement;
+
+  if (this.touchStartY - touchEndY < -50) { 
 
     setTimeout(() => {
-      this.expandRing = false;
-    }, 4500);
-  }
-  @HostListener('mousemove', ['$event'])
-  onMouseMove(event: MouseEvent): void {
-    const mouseX = event.clientX;
-    const mouseY = event.clientY;
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
-    // Update the light position dynamically
-    this.lightStyle = {
-      left: `${mouseX}px`,
-      top: `${mouseY}px`,
-    };
+        if (this.isThankYouVisible) {
+          
+          this.isThankYouVisible = false;
+          thankYou.classList.remove('opacity-100', 'translate-y-0');
+        }
+      }
+      
+    }, 0); 
   }
+  
+}
 
-  ngOnDestroy(): void {
-    this.routeSub?.unsubscribe();
-  }
+
+ngOnDestroy(): void {
+  this.routeSub?.unsubscribe();
+  if (this.expandTimeout) clearTimeout(this.expandTimeout);
+  if (this.mouseMoveTimeout) cancelAnimationFrame(this.mouseMoveTimeout);
+  if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
+}
 }

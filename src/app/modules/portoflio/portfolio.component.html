@@ -1,12 +1,10 @@
-<div class="main-portfolio-container text-black w-full h-screen flex ">
+<div class="main-portfolio-container text-black w-full h-screen flex">
   @if(!isMobile){
-    <div
+  <div
     class="overflow-hidden main-info-container w-1/2 pl-14 pr-28 flex flex-col justify-center items-center relative"
   >
     <span class="backdrop overflow-hidden"></span>
     <app-holographic-ring [expandRing]="expandRing"></app-holographic-ring>
-  
-    
 
     <div class="my-info-container w-full">
       <h1 class="my-name">Farid Fehresti</h1>
@@ -14,113 +12,150 @@
       <p class="max-w-xs">
         I build accessible, pixel-perfect digital experiences for the web
       </p>
+      <p class="">
+        Founder and creator of Worksphere.       
+        <a [routerLink]="'/auth/login'" class=" text-white" (click)="scrollToSection('about')">Go To WorkSphere <span class="icon-sphere"></span></a>.
+
+      </p>
     </div>
     <div class="menu-container w-full flex flex-col gap-2">
-      <a class="menu-item" 
-         [class.menu-item-selected]="activeSection === 'about'"
-         (click)="scrollToSection('about')">
+      <a
+        class="menu-item"
+        [class.menu-item-selected]="activeSection === 'about'"
+        (click)="scrollToSection('about')"
+      >
         <span class="link-line"></span>
         About
       </a>
-      <a class="menu-item"
-         [class.menu-item-selected]="activeSection === 'expriences'"
-         (click)="scrollToSection('expriences')">
+      <a
+        class="menu-item"
+        [class.menu-item-selected]="activeSection === 'expriences'"
+        (click)="scrollToSection('expriences')"
+      >
         Expriences
       </a>
-      <a class="menu-item"
-         [class.menu-item-selected]="activeSection === 'stack'"
-         (click)="scrollToSection('stack')">
+      <a
+        class="menu-item"
+        [class.menu-item-selected]="activeSection === 'stack'"
+        (click)="scrollToSection('stack')"
+      >
         Stack
       </a>
-      <a class="menu-item"
-         [class.menu-item-selected]="activeSection === 'projects'"
-         (click)="scrollToSection('projects')">
+      <a
+        class="menu-item"
+        [class.menu-item-selected]="activeSection === 'projects'"
+        (click)="scrollToSection('projects')"
+      >
         Projects
       </a>
     </div>
-    
+
     <div class="links-container w-full flex gap-4 text-3xl mt-8">
-      <a class="link-item" href="https://github.com/FaridFehresti" target="_blank" ><span class="icon-github"></span></a>
+      <a
+        class="link-item"
+        href="https://github.com/FaridFehresti"
+        target="_blank"
+        ><span class="icon-github"></span
+      ></a>
       <a class="link-item" href=""><span class="icon-linkedin"></span></a>
-      <a class="link-item" href=""><span class="icon-instagram"></span></a>
+      <a class="link-item" href="https://www.instagram.com/farid_fehresti/" target="_blank"><span class="icon-instagram"></span></a>
+      <a class="link-item" href="mailto:contact.faridfehresti.com"><span class="icon-email1"></span></a>
 
     </div>
   </div>
   }
-  <div #scrollerContainer [class]="!isMobile  ? 'scroller-container w-1/2  overflow-y-auto' : 'scroller-container w-full overflow-y-auto'">
-    @if(isMobile){
-      <div
-    class="overflow-hidden main-info-container !h-screen w-full px-12 pb-8 flex flex-col justify-center items-center"
+  <div
+    #scrollerContainer
+    [class]="
+      !isMobile
+        ? 'scroller-container w-1/2  overflow-y-auto'
+        : 'scroller-container w-full overflow-y-auto'
+    "
   >
-    <span class="backdrop overflow-hidden"></span>
-    <app-holographic-ring [expandRing]="expandRing"></app-holographic-ring>
+    @if(isMobile){
+    <div
+      class="overflow-hidden main-info-container !h-screen w-full px-12 pb-8 flex flex-col justify-center items-center"
+    >
+      <span class="backdrop overflow-hidden"></span>
+      <app-holographic-ring [expandRing]="expandRing"></app-holographic-ring>
 
-    <div class="my-info-container w-full">
-      <h1 class="my-name !text-5xl">Farid Fehresti</h1>
-      <h2 class="my-title !text-2xl">Full Stack Web Developer</h2>
-      <p [class]="isMobile ? 'max-w-xs font-bold': 'max-w-xs'" >
-        I build accessible, pixel-perfect digital experiences for the web.
-      </p>
-      
-    </div>
-    <div class="menu-container w-full flex flex-col gap-2">
-      <a class="menu-item" 
-         [class.menu-item-selected]="activeSection === 'about'"
-         (click)="scrollToSection('about')">
-        <span class="link-line"></span>
-        About
-      </a>
-      <a class="menu-item"
-         [class.menu-item-selected]="activeSection === 'expriences'"
-         (click)="scrollToSection('expriences')">
-        Expriences
-      </a>
-      <a class="menu-item"
-         [class.menu-item-selected]="activeSection === 'stack'"
-         (click)="scrollToSection('stack')">
-        Stack
-      </a>
-      <a class="menu-item"
-         [class.menu-item-selected]="activeSection === 'projects'"
-         (click)="scrollToSection('projects')">
-        Projects
-      </a>
-    </div>
-    
-    <div class="links-container w-full flex gap-4 text-3xl mt-8">
-      <a class="link-item" href="https://github.com/FaridFehresti" target="_blank" ><span class="icon-github"></span></a>
-      <a class="link-item" href=""><span class="icon-linkedin"></span></a>
-      <a class="link-item" href=""><span class="icon-instagram"></span></a>
+      <div class="my-info-container w-full">
+        <h1 class="my-name !text-5xl">Farid Fehresti</h1>
+        <h2 class="my-title !text-2xl">Full Stack Web Developer</h2>
+        <p [class]="isMobile ? 'max-w-xs font-bold' : 'max-w-xs'">
+          I build accessible, pixel-perfect digital experiences for the web.
+        </p>
+      </div>
+      <div class="menu-container w-full flex flex-col gap-2">
+        <a
+          class="menu-item"
+          [class.menu-item-selected]="activeSection === 'about'"
+          (click)="scrollToSection('about')"
+        >
+          <span class="link-line"></span>
+          About
+        </a>
+        <a
+          class="menu-item"
+          [class.menu-item-selected]="activeSection === 'expriences'"
+          (click)="scrollToSection('expriences')"
+        >
+          Expriences
+        </a>
+        <a
+          class="menu-item"
+          [class.menu-item-selected]="activeSection === 'stack'"
+          (click)="scrollToSection('stack')"
+        >
+          Stack
+        </a>
+        <a
+          class="menu-item"
+          [class.menu-item-selected]="activeSection === 'projects'"
+          (click)="scrollToSection('projects')"
+        >
+          Projects
+        </a>
+      </div>
 
+      <div class="links-container w-full flex gap-4 text-3xl mt-8">
+        <a
+          class="link-item"
+          href="https://github.com/FaridFehresti"
+          target="_blank"
+          ><span class="icon-github"></span
+        ></a>
+        <a class="link-item" href=""><span class="icon-linkedin"></span></a>
+        <a class="link-item" href="https://www.instagram.com/farid_fehresti/" target="_blank"><span class="icon-instagram"></span></a>
+        <a class="link-item" href="mailto:contact.faridfehresti.com"><span class="icon-email1"></span></a>
+
+      </div>
     </div>
-  </div>
     }
-    <div [class]="isMobile ? 'about px-4 py-2': 'about  px-12 py-8' ">
+    <div [class]="isMobile ? 'about px-4 py-2' : 'about  px-12 py-8'">
       <div class="about-text-container py-4 flex flex-col gap-4">
         <p
           [appTypewriter]="paragraphHtml1"
           [speed]="100"
           [cursorSpeed]="100"
-          class="text-white "
-
+          class="text-white"
         ></p>
         <p
           [appTypewriter]="paragraphHtml2"
           [speed]="100"
           [cursorSpeed]="100"
-          class="text-white "
-
+          class="text-white"
         ></p>
         <p
           [appTypewriter]="paragraphHtml3"
           [speed]="100"
           [cursorSpeed]="100"
-          class="text-white "
+          class="text-white"
         ></p>
       </div>
       <div class="about-header-container flex flex-col gap-6">
         <!-- Frontend Developer Section -->
-        <div class="header-card-item p-2  w-1/2">
+        <div class="header-card-item p-2 w-1/2">
           <div class="card-header flex gap-4 items-center">
             <img class="icon-image mb-4" [src]="reactImage" alt="" />
             <div class="card-header-text-container flex flex-col text-white">
@@ -129,19 +164,22 @@
             </div>
           </div>
           <div class="card-header-content relative">
-            <div class="tags-container flex flex-col justify-center w-fit items-center">
+            <div
+              class="tags-container flex flex-col justify-center w-fit items-center"
+            >
               <span class="font-bold text-white">{{ "&lt;h3&gt;" }}</span>
               <span class="tag-line"></span>
               <span class="font-bold text-white">{{ "&lt;/h3&gt;" }}</span>
             </div>
-            <p appTypewriter="Experienced in building interactive, responsive user interfaces using React, Next.js, and Angular, focused on seamless user experience."
-               [speed]="50"
-               [cursorSpeed]="200"
-               class="text-content absolute text-inherit text-white text-sm">
-            </p>
+            <p
+              appTypewriter="Experienced in building interactive, responsive user interfaces using React, Next.js, and Angular, focused on seamless user experience."
+              [speed]="50"
+              [cursorSpeed]="200"
+              class="text-content absolute text-inherit text-white text-sm"
+            ></p>
           </div>
         </div>
-      
+
         <div class="header-card-item p-2">
           <div class="card-header flex gap-4 items-center">
             <img class="icon-image mb-4" src="/images/nodejs.png" alt="" />
@@ -151,110 +189,158 @@
             </div>
           </div>
           <div class="card-header-content relative">
-            <div class="tags-container flex flex-col justify-center w-fit items-center gap-4">
+            <div
+              class="tags-container flex flex-col justify-center w-fit items-center gap-4"
+            >
               <span class="font-bold text-white">{{ "&lt;h3&gt;" }}</span>
               <span class="tag-line"></span>
               <span class="font-bold text-white">{{ "&lt;/h3&gt;" }}</span>
             </div>
-            <p appTypewriter="Specialized in developing scalable and secure backend systems using Node.js and NestJS to power robust web applications."
-               [speed]="50"
-               [cursorSpeed]="200"
-               class="text-content absolute text-inherit text-white">
-            </p>
+            <p
+              appTypewriter="Specialized in developing scalable and secure backend systems using Node.js and NestJS to power robust web applications."
+              [speed]="50"
+              [cursorSpeed]="200"
+              class="text-content absolute text-inherit text-white"
+            ></p>
           </div>
         </div>
       </div>
-      
     </div>
-    <div [class]="isMobile ? 'expriences px-4 py-2 ':'expriences px-12 py-8'">
+    <div [class]="isMobile ? 'expriences px-4 py-2 ' : 'expriences px-12 py-8'">
       @for(exprience of listOfExpriences ; track $index){
-        <div class="exprience-card">
-          <div class="date-container">
-            <span class="date">{{exprience.date}}</span>
-          </div>
-          <div class="content">
-            <span class="title">{{exprience.title}}</span>
-            <span class="description">{{exprience.description}}</span>
-           <div class="skills-container flex-wrap">
+      <div class="exprience-card">
+        <div class="date-container">
+          <span class="date">{{ exprience.date }}</span>
+        </div>
+        <div class="content">
+          <span class="title">{{ exprience.title }}</span>
+          <span class="description">{{ exprience.description }}</span>
+          <div class="skills-container flex-wrap">
             @for (skill of exprience.skils; track $index) {
-              <span class="skill-item">{{skill}}</span>
+            <span class="skill-item">{{ skill }}</span>
             }
-           </div>
           </div>
         </div>
+      </div>
       }
-
+      <a
+        (click)="downloadResume()"
+        class="download-resume-btn"
+        download="faridfehresti-resume.pdf"
+        >Download Full Resume <span class="icon-download"></span
+      ></a>
     </div>
-    <div [class]="isMobile ? 'stack w-full px-4 py-2 flex gap-4 text-white  h-fit items-start justify-center' : 'stack w-full px-12 py-8 flex gap-4 text-white  h-fit items-start justify-center' ">
-      <div class="frontend w-full flex flex-col  gap-2 ">
-        <span [class]="isMobile ? '!text-md mb-2 text-nowrap' : 'text-2xl mb-2'">Frontend Dev</span>
+    <div
+      [class]="
+        isMobile
+          ? 'stack w-full px-4 py-2 flex gap-4 text-white  h-fit items-start justify-center'
+          : 'stack w-full px-12 py-8 flex gap-4 text-white  h-fit items-start justify-center'
+      "
+    >
+      <div class="frontend w-full flex flex-col gap-2">
+        <span [class]="isMobile ? '!text-md mb-2 text-nowrap' : 'text-2xl mb-2'"
+          >Frontend Dev</span
+        >
         <div class="stack-items-container flex flex-col gap-2">
           @for(item of listOfFrontendStacks; track $index){
-            <div class="stack-item">
-              <div class="stack-item-inner">
-                <div class="stack-item-front">{{ item.name }}</div>
-                <div class="stack-item-back">{{ item.name }}</div>
-                <div class="stack-item-top"></div>
-                <div class="stack-item-bottom"></div>
-              </div>
+          <div class="stack-item">
+            <div class="stack-item-inner">
+              <div class="stack-item-front">{{ item.name }}</div>
+              <div class="stack-item-back">{{ item.name }}</div>
+              <div class="stack-item-top"></div>
+              <div class="stack-item-bottom"></div>
             </div>
+          </div>
           }
         </div>
-        
-    </div>
-    <div class="backend w-full flex flex-col  gap-2">
-      <span [class]="isMobile ? '!text-md mb-2 text-nowrap' : 'text-2xl mb-2'">Backend Dev</span>
-      <div class="stack-items-container flex flex-col gap-2 w-full">
+      </div>
+      <div class="backend w-full flex flex-col gap-2">
+        <span [class]="isMobile ? '!text-md mb-2 text-nowrap' : 'text-2xl mb-2'"
+          >Backend Dev</span
+        >
+        <div class="stack-items-container flex flex-col gap-2 w-full">
           @for(item of listOfBackendStacks; track $index){
-            <div class="stack-item w-full">
-              <div class="stack-item-inner w-full">
-                <div class="stack-item-front w-full">{{ item.name }}</div>
-                <div class="stack-item-back w-full">{{ item.name }}</div>
-                <div class="stack-item-top w-full"></div>
-                <div class="stack-item-bottom w-full"></div>
-              </div>
+          <div class="stack-item w-full">
+            <div class="stack-item-inner w-full">
+              <div class="stack-item-front w-full">{{ item.name }}</div>
+              <div class="stack-item-back w-full">{{ item.name }}</div>
+              <div class="stack-item-top w-full"></div>
+              <div class="stack-item-bottom w-full"></div>
             </div>
+          </div>
           }
         </div>
-        
+      </div>
     </div>
-    </div>
-    <div [class]="isMobile ? 'projects  px-4 py-2' : 'projects  px-12 py-8'">
+    <div [class]="isMobile ? 'projects px-4 py-2 ' : 'projects  px-12 py-8 '">
       <mat-grid-list cols="2" gutterSize="16" rowHeight="2:1">
         <mat-grid-tile [rowspan]="3">
-          <div class="project-overlay">
-            <div class="project-title">BestInform</div>
-            <div class="project-description">Vacation booking platform</div>
-          </div>
-          <img class="project-image" src="/images/bestinform.png" alt="">
+          <a href="https://bestinform.eu/" target="_blank">
+            <div class="project-overlay">
+              <div class="project-title">BestInform</div>
+              <div class="project-description">Vacation booking platform</div>
+            </div>
+            <img class="project-image" src="/images/bestinform.png" alt="" />
+          </a>
         </mat-grid-tile>
-        
+
         <mat-grid-tile [rowspan]="2">
-          <div class="project-overlay">
-            <div class="project-title">MadTalk</div>
-            <div class="project-description">Online education during COVID</div>
-          </div>
-          <img class="project-image" src="/images/madtalk.png" alt="">
+          <a href="https://panel.madtalk.ir/" target="_blank">
+            <div class="project-overlay">
+              <div class="project-title">MadTalk</div>
+              <div class="project-description">Online education platform</div>
+            </div>
+            <img class="project-image" src="/images/madtalk.png" alt="" />
+          </a>
         </mat-grid-tile>
-      
+
         <mat-grid-tile [rowspan]="3">
           <div class="project-overlay">
             <div class="project-title">Fani</div>
             <div class="project-description">Technical school courses</div>
           </div>
-          <img class="project-image" src="/images/fani.png" alt="">
+          <img class="project-image" src="/images/fani.png" alt="" />
         </mat-grid-tile>
-      
+
         <mat-grid-tile [rowspan]="2">
           <div class="project-overlay">
             <div class="project-title">WorkSphere</div>
             <div class="project-description">Job management system</div>
           </div>
-          <img class="project-image" src="/images/worksphere.png" alt="">
+          <img class="project-image" src="/images/worksphere.png" alt="" />
         </mat-grid-tile>
       </mat-grid-list>
-      
-      
+    </div>
+    <div class="footer-container relative w-full h-screen overflow-hidden">
+      <div
+        #thankYouSection
+        (mousewheel)="handleThankYouScroll($event)"
+        (touchstart)="handleTouchStart($event)"
+  (touchend)="handleTouchEnd($event)"
+        class="thank-you-section fixed inset-0 flex flex-col items-center justify-center bg-black text-white opacity-0 transform translate-y-full transition-all duration-200"
+      >
+        @if(isThankYouVisible){
+          <p [class]="isMobile ?  '!text-lg font-bold':'text-4xl font-bold'"  >{{thankYouHeaderText}}</p>
+        <p   [class]="isMobile ? 'text-md text-center p-4' :'text-lg mt-4' ">
+          {{thankYouParagraphText}}
+        </p>
+        <span class="text-lg font-bold">{{'contact.faridfehresti@gmail.com'}}</span>
+        <div class="flex gap-4 mt-6">
+          <div [class]="isMobile ? 'links-container w-full flex gap-4 text-3xl mt-8' : 'links-container w-full flex gap-4 text-3xl mt-8'">
+            <a
+              class="link-item"
+              href="https://github.com/FaridFehresti"
+              target="_blank"
+              ><span class="icon-github"></span
+            ></a>
+            <a class="link-item" href=""><span class="icon-linkedin"></span></a>
+            <a class="link-item" href="https://www.instagram.com/farid_fehresti/" target="_blank"><span class="icon-instagram"></span></a>
+            <a class="link-item" href="mailto:contact.faridfehresti.com"><span class="icon-email1"></span></a>
+
+          </div>
+        </div>
+        }
+      </div>
     </div>
   </div>
   <div class="light" [ngStyle]="lightStyle"></div>

@@ -146,7 +146,6 @@
 }
 .exprience-card{
   width: 100%;
-  border-radius: 8px;
   padding: 16px 16px;
   margin-bottom: 16px;
   color: var(--white);
@@ -160,8 +159,23 @@
   }
 }
 .exprience-card:hover{
-  border-radius: 8px;
   background-color: rgba(163, 29, 29, 0.3);;
+}
+.download-resume-btn{
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  cursor: pointer;
+  transition: all 0.5s ease;
+  background-color: rgba(163, 29, 29, 0.6);
+  padding: 8px;
+}
+.download-resume-btn:hover{
+  background-color: var(--white);
+  color: var(--black);
 }
 .date{
   font-size: 12px;
@@ -211,7 +225,6 @@
 }
 .frontend{
   padding: 16px;
-  border-radius: 8px;
   transition: all 0.5s ease;
   height: 100%;
 }
@@ -222,7 +235,6 @@
 }
 .backend{
   padding: 16px;
-  border-radius: 8px;
   transition: all 0.5s ease;
 }
 .backend{
@@ -362,6 +374,30 @@
 
 
 
+.thank-you-section {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.7s ease-in-out;
+}
+
+.thank-you-section.opacity-100 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 2px solid white;
+  text-decoration: none;
+  color: white;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background: white;
+  color: black;
+}
 
 
 html {
