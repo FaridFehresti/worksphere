@@ -65,16 +65,25 @@
     
       <mat-form-field class="w-full">
         <mat-label>Description</mat-label>
-        <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+        <textarea formControlName="description" matInput placeholder="Ex. It makes me feel..."></textarea>
       </mat-form-field>
       </div>
       <div class="row">
 
+        
         <mat-form-field>
           <mat-label>Category</mat-label>
           <mat-select formControlName="taskCategoryId" placeholder="select task cateogry">
             @for ( category of data.listOfCategories; track $index) {
               <mat-option [value]="category.id">{{category.title}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Tags</mat-label>
+          <mat-select multiple formControlName="tags" placeholder="select task cateogry">
+            @for ( tag of data.listOfTags; track $index) {
+              <mat-option [value]="tag.id">{{tag.title}}</mat-option>
             }
           </mat-select>
         </mat-form-field>

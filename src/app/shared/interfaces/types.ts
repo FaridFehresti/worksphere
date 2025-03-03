@@ -10,6 +10,11 @@ export interface ITaskCategory{
     title:string,
     tasks?:ITaskData[]
 }
+export interface ITagData{
+    title:string,
+    id:number,
+    color:string
+}
 export interface ITaskFormData{
     title:string,
     description?: null,
@@ -30,7 +35,7 @@ export interface ITaskData{
     hardness?: number,
     priority?: number,
     deadline?: string,
-    isComplete: false,
+    isComplete: boolean,
     createdBy: number,
     userId: number,
     taskCategoryId: number,
@@ -38,8 +43,4 @@ export interface ITaskData{
     tags?:Array<ITagData>, 
     taskCategory: ITaskCategory,
     subtasks: ITaskData[]
-}
-interface ITagData{
-    title:string,
-    id:number
 }

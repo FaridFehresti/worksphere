@@ -272,7 +272,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 200px;
 }
 
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled).mat-primary{
+  background-color: var(--primary) !important;
 
+}
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled).mat-secondary{
+  background-color: var(--secondary) !important;
 
+}
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled).mat-tertiary{
+  background-color: var(--tertiary) !important;
 
+}
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled).mat-success{
+  background-color: var(--success) !important;
 
+}
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled).mat-error{
+  background-color: var(--error) !important;
+
+}
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled).mat-warning{
+  background-color: var(--warning) !important;
+
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label{
+  color: var(--darkText) !important;
+  
+}

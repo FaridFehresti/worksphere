@@ -5,17 +5,16 @@ import { Subscription } from 'rxjs';
 import { DataOperationService } from 'src/app/modules/data/data-operation.service';
 import {  ITagData, ITaskCategory, ITaskFormData, IUserData } from 'src/app/shared/interfaces/types';
 @Component({
-  selector: 'app-task-form',
-  templateUrl: 'data-task-form.component.html',
+  selector: 'app-tag-form',
+  templateUrl: 'data-tag-form.component.html',
 })
-export class DataTaskForm  {
+export class DataTagForm  {
   dialog = inject(MatDialog);
+  
   @Input() listOfCategories: ITaskCategory[] = [];
   @Input() listOfTags:ITagData[] = []
   openDialog() {
-    console.log('first child:',this.listOfTags);
-    this.dialog.open(DataTaskFormDialog, {
-      
+    this.dialog.open(DataTagFormDialog, {
       data: {
         listOfCategories: this.listOfCategories,
         listOfTags:this.listOfTags
@@ -24,47 +23,48 @@ export class DataTaskForm  {
   }
 }
 @Component({
-  selector: 'app-data-task-dialog',
-  templateUrl: 'data-task-dialog.html',
-  styleUrl: 'data-task-form.component.scss'
+  selector: 'app-data-tag-dialog',
+  templateUrl: 'data-tag-dialog.html',
+  styleUrl: 'data-tag-form.component.scss'
   
 })
-export class DataTaskFormDialog implements OnInit,OnDestroy {
+export class DataTagFormDialog implements OnInit,OnDestroy {
   data = inject(MAT_DIALOG_DATA);
-  createTask$:Subscription | null = null;
+  createTag$:Subscription | null = null;
   isLoading:boolean = false;
   userData:IUserData = JSON.parse(localStorage.getItem('user') || '');
+  colors:{name:string, value:string, class:string}[] = [
+    {name:'Primary',value:'primary',class:'bg-primary'},
+    {name:'Secondary',value:'secondary',class:'bg-secondary'},
+    {name:'Tertiary',value:'tertiary',class:'bg-tertiary'},
+    {name:'Red',value:'error',class:'bg-error'},
+    {name:'Green',value:'success',class:'bg-success'},
+    {name:'Yellow',value:'warning',class:'bg-warning'},
+  ]
   constructor(private dataOp:DataOperationService,private fb: FormBuilder,private dialog:MatDialog) { }
   ngOnInit(): void {
     
   }
   ngOnDestroy(): void {
-    this.createTask$?.unsubscribe()
+    this.createTag$?.unsubscribe()
   }
-  taskForm = this.fb.group({
+  tagForm = this.fb.group({
     title: new FormControl<string>('', [Validators.required]), 
-    hardness: new FormControl<number | null>(null),
-    priority: new FormControl<number | null>(null),
-    deadline: new FormControl<string | null>(null),
-    description: new FormControl<string | null>(null),
-    taskCategoryId: new FormControl<number | null>(null),
-    userId: new FormControl<number | null>(this.userData.id || null),
-    isComplete: new FormControl<boolean>(false),
-    createdBy: new FormControl<number>(this.userData.id),
-    tags: new FormControl<Array<ITagData> | null>(null),
+    color: new FormControl<string | null>(null),
   });
   
 
   validateForm(): boolean {
-    if (this.taskForm.valid) {
+    if (this.tagForm.valid) {
       return true;
     }
     return false;
   }
   onSubmit(): void {
+    console.log(this.tagForm.value);
     if(this.validateForm()){
       this.isLoading = true
-      this.createTask$ = this.dataOp.createTask(this.taskForm.value).subscribe({
+      this.createTag$ = this.dataOp.createTag(this.tagForm.value).subscribe({
           next:(res) => {
             console.log(res);
             this.dialog.closeAll();
@@ -77,13 +77,11 @@ export class DataTaskFormDialog implements OnInit,OnDestroy {
           }
       })
     }else{
-      this.taskForm.markAllAsTouched();
+      this.tagForm.markAllAsTouched();
     }
   }
   onCancel(): void {
     this.dialog.closeAll();
   }
-  onDateChange(event:any){
-    this.taskForm.controls['deadline'].patchValue(event.value)
-  }
+ 
 }

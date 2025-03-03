@@ -27,7 +27,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { DataTaskCategoryForm, DataTaskCategoryFormDialog } from './components/data-tasks/components/data-task-category-form/data-task-form-category.component';
 import { EmptyListComponent } from 'src/app/shared/components/empty-list/empty-list/empty-list.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { DataTagForm, DataTagFormDialog } from './components/data-tasks/components/data-tag-form/data-tag-form.component';
 const MAT = [
   MatButtonModule,
   MatCardModule,
@@ -45,7 +46,8 @@ const MAT = [
   MatFormFieldModule,
   MatSelectModule,
   MatTabsModule,
-  EmptyListComponent
+  EmptyListComponent,
+  MatAutocompleteModule
 ];
 
 const COMPONENTS = [
@@ -56,6 +58,8 @@ const COMPONENTS = [
   DataTaskFormDialog,
   DataTaskCategoryForm,
   DataTaskCategoryFormDialog,
+  DataTagForm,
+  DataTagFormDialog,
   
 ];
 

@@ -7,7 +7,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { DataOperationService } from '../../data-operation.service';
 import { Subscription } from 'rxjs';
-import { ITaskCategory } from 'src/app/shared/interfaces/types';
+import { ITagData, ITaskCategory, ITaskData } from 'src/app/shared/interfaces/types';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
 export interface Task {
@@ -30,10 +30,12 @@ export class DataTasksComponent implements OnInit, OnDestroy{
   allComplete: boolean = false;
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
   listOfTaskCategories:ITaskCategory[] = []
+  listOfTags:ITagData[] = []
   taskCategoriesSubscription:Subscription | null = null;
   tasksSubscription:Subscription | null = null;
   selecteCategoryId:number | null = 0;
   isLoading:boolean = false;
+  listOfTasks:ITaskData[] = []
   constructor(private dataOp: DataOperationService) {
     
   }
@@ -44,12 +46,19 @@ export class DataTasksComponent implements OnInit, OnDestroy{
     this.isLoading = true
     await this.getListOfTaskCategories();
     await this.getListOfTaks(0);
+    await this.getListOfTags();
     this.isLoading = false;
   }
   ngOnDestroy(): void {
     
       this.taskCategoriesSubscription?.unsubscribe()
     
+  }
+  getListOfTags(){
+    this.dataOp.getTagList().subscribe({next:(res) => {
+      console.log('fgetched:',res)  
+      this.listOfTags =res
+    }})
   }
   getListOfTaskCategories(){
     this.taskCategoriesSubscription = this.dataOp.getTaskCategoryList().subscribe({next:(res) => {
@@ -80,6 +89,8 @@ export class DataTasksComponent implements OnInit, OnDestroy{
     if (event.index === 0) {
       // "All" tab selected
       this.selecteCategoryId = null;
+        this.getListOfTaks(0);
+      
     } else {
       // Subtract 1 because the first tab is "All"
       const selectedCategory = this.listOfTaskCategories[event.index - 1];
@@ -107,87 +118,24 @@ export class DataTasksComponent implements OnInit, OnDestroy{
     }
   }
 
-  listOfTasks: Array<Task> = [
-    {
-      name: 'Complete Project Proposal',
-      completed: false,
-      color: 'primary',
-      id: 1,
-      description: 'Draft and finalize the project proposal document.',
-      tags: ['work', 'deadline'],
-      subtasks: [
-        {
-          name: 'Research',
-          completed: false,
-          id: 2,
-          description: 'Gather necessary information and data.',
-          color: 'primary'
-        },
-        {
-          name: 'Outline',
-          completed: false,
-          id: 3,
-          description: 'Create a detailed outline of the proposal.',
-          color: 'accent'
-        },
-        {
-          name: 'Review',
-          completed: false,
-          id: 4,
-          description: 'Review and revise the draft.',
-          color: 'warn'
-        },
-      ],
-    },
-    {
-      name: 'Complete Project Proposal',
-      completed: false,
-      color: 'primary',
-      id: 5,
-      description: 'Draft and finalize the project proposal document.',
-      tags: ['work', 'deadline'],
-      subtasks: [
-        {
-          name: 'Research',
-          completed: false,
-          id: 12,
-          description: 'Gather necessary information and data.',
-          color: 'primary'
-        },
-        {
-          name: 'Outline',
-          completed: false,
-          id: 34,
-          description: 'Create a detailed outline of the proposal.',
-          color: 'accent'
-        },
-        {
-          name: 'Review',
-          completed: false,
-          id: 65,
-          description: 'Review and revise the draft.',
-          color: 'warn'
-        },
-      ],
-    },
-  ];
+  
 
-  updateAllComplete(task: Task) {
+  updateAllComplete(task: ITaskData) {
     if (task && task.subtasks) {
-      task.completed = task.subtasks.every(subtask => subtask.completed);
+      task.isComplete = task.subtasks.every(subtask => subtask.isComplete);
     }
   }
 
-  someComplete(task: Task): boolean {
+  someComplete(task: ITaskData): boolean {
     if (task && task.subtasks) {
-      return task.subtasks.some(subtask => subtask.completed) && !task.completed;
+      return task.subtasks.some(subtask => subtask.isComplete) && !task.isComplete;
     }
     return false;
   }
 
-  setAll(completed: boolean, task: Task) {
+  setAll(completed: boolean, task: ITaskData) {
     if (task && task.subtasks) {
-      task.subtasks.forEach(subtask => subtask.completed = completed);
+      task.subtasks.forEach(subtask => subtask.isComplete = completed);
       this.updateAllComplete(task);
     }
   }
@@ -196,4 +144,5 @@ export class DataTasksComponent implements OnInit, OnDestroy{
       console.log(res);
     })
   }
+  
 }

@@ -37,6 +37,13 @@ export class DataOperationService {
     createTask(body:any): Observable<any> {
         return this.http.post<any>(this.apiConfig.taskUrls.postTask, body);
     }
+    createTag(body:any): Observable<any> {
+        return this.http.post<any>(this.apiConfig.tagUrls.postTag, body);
+
+    }
+    getTagList(): Observable<any> {
+        return this.http.get<any>(this.apiConfig.tagUrls.getTagList);
+    }
     
     
     
